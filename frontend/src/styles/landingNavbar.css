@@ -1,0 +1,14 @@
+.brandName{
+    font-weight: bold;
+    text-shadow: 1px 1px;
+    margin-left: 40px;
+    font-style: normal;
+    font-size: 23px;
+    
+}
+
+.btn{
+    background: #3B0A79;
+    margin-right: 20px;
+    width: 90px;
+}
