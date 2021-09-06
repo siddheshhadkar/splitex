@@ -1,0 +1,113 @@
+.label{
+    display: inline-block;
+    color:#3B0A79;
+    margin-top: 10px;
+}
+
+.page-title-separator{
+    margin-top: 0px;
+    color:#3B0A79;
+    height:3px !important;
+}
+
+.add-expense-btn{
+    
+    margin-top: 10px;
+
+    width: 150px;
+    height:40px;
+    border-radius: 5px;
+    float: right;
+}
+
+.card-title{
+        color:#3B0A79;
+        font-size: 30px;
+}
+
+.transaction-card-body{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.transaction-card-date{
+    float:right;
+    position: relative;
+    bottom:29px;
+    color:gray;
+
+}
+
+.owed-card-text{
+    position: relative;
+    top:15px;
+    color:#3B0A79;
+}
+
+.owe-card-text{
+    position: relative;
+    color:#3B0A79;
+    bottom:7px;
+}
+
+.pay-button-div{
+    position: relative;
+    bottom:30px;
+    float: right;
+}
+
+.pay-button{
+    background-color: red;
+    color:white;
+    width:100px;
+    height:40px;
+    border-radius: 10px;
+    border:none;
+
+}
+
+
+.owed-card-amount{
+    float:right;
+}
+
+.balance-div{
+        color:#3B0A79;
+        font-size: 50px;
+        position: relative;
+        
+        text-align: center;
+
+}
+.add-balance-btn{
+        font-size: 20px;
+        width: 200px;
+        position: relative;
+        text-align: center;
+        top:170px;
+        left:82px;
+
+}
+
+.title-separator{
+    margin-top: 0px;
+    color:#3B0A79;
+    height:3px !important;
+}
+
+.right-section-card-title{
+    text-align: center;
+      color:#3B0A79;
+        font-size: 30px;
+}
+
+.friends-text{
+    color:#3B0A79;
+    font-size: 20px;
+}
+
+.friends-card{
+    bottom:24px;
+}
+
+
