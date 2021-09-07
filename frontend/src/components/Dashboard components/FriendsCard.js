@@ -8,7 +8,7 @@ export default function FriendsCard() {
     <>
       <Card
         className="friends-card"
-        style={{ width: "25rem", height: "20rem" }}
+        style={{ width: "auto", height: "auto" }}
       >
         <Card.Body>
           <Card.Title className="right-section-card-title">Friends</Card.Title>
