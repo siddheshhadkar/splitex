@@ -1,32 +1,30 @@
-import React from 'react'
-import {Navbar, Container, Button} from 'react-bootstrap'
-import '../styles/landingNavbar.css'
+import React from "react";
+import { Navbar, Container, Button } from "react-bootstrap";
+import "../styles/landingNavbar.css";
+import { NavLink } from "react-router-dom";
 
 export default function LandingNavbar() {
-    return (
-      <>
-        <Navbar bg="light">
-          <Container>
-            <Navbar.Brand
-              href=""
-              className="brandName"
-              style={{ color: "#3B0A79" }}
-            >
-              {" "}
-              SplitEx{" "}
+  return (
+    <>
+      <Navbar bg="light">
+        <Container>
+          <NavLink to="/" style={{ textDecoration: "none" }}>
+            <Navbar.Brand className="brandName" style={{ color: "#3B0A79" }}>
+              SplitEx
             </Navbar.Brand>
-          </Container>
+          </NavLink>
+        </Container>
 
-          <Button href="#" className="btn">
-            {" "}
-            Login{" "}
+        <NavLink to="/login" style={{ textDecoration: "none" }}>
+          <Button className="btn"> Login </Button>
+        </NavLink>
+
+        <NavLink to="/signup" style={{ textDecoration: "none" }}>
+          <Button className="btn" style={{ marginRight: 50 }}>
+            SignUp
           </Button>
-          
-          <Button href="#" className="btn" style={{ marginRight: 50 }}>
-            {" "}
-            SignUp{" "}
-          </Button>
-        </Navbar>
-      </>
-    );
+        </NavLink>
+      </Navbar>
+    </>
+  );
 }
