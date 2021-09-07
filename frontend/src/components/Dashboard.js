@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import LandingNavbar from './LandingNavbar';
+import DashboardNavbar from './DashboardNavbar';
 import '../styles/dashboard.css';
 import YouOweCard from './YouOweCard';
 import YouAreOwedCard from './YouAreOwedCard';
@@ -11,7 +11,7 @@ import BalanceCard from './BalanceCard';
 export default function Dashboard() {
   return (
     <>
-      <LandingNavbar />
+      <DashboardNavbar />
       <Container>
         <Row>
           <Col xs={12} md={8}>
