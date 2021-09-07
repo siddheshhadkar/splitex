@@ -4,10 +4,10 @@ import "../../styles/you-owe-card.css";
 export default function YouOweCard() {
   return (
     <>
-      <Card style={{ width: "25rem", height: "25rem" }}>
+      <Card style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="card-title">You owe</Card.Title>
-          <Card style={{ width: "23rem", height: "5.5rem" }}>
+          <Card style={{ width: "auto", height: "auto" }}>
             <Card.Body>
               <Card.Text className="owe-card-text">
                 <strong> Monali </strong> <br />
@@ -20,7 +20,7 @@ export default function YouOweCard() {
             </Card.Body>
           </Card>
           <br />
-          <Card style={{ width: "23rem", height: "5.5rem" }}>
+          <Card style={{ width: "auto", height: "auto" }}>
             <Card.Body>
               <Card.Text className="owe-card-text">
                 <strong> Aarushi </strong> <br />
@@ -33,7 +33,7 @@ export default function YouOweCard() {
             </Card.Body>
           </Card>
           <br />
-          <Card style={{ width: "23rem", height: "5.5rem" }}>
+          <Card style={{ width: "auto", height: "auto" }}>
             <Card.Body>
               <Card.Text className="owe-card-text">
                 <strong> Monali </strong> <br />

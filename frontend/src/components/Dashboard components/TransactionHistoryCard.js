@@ -4,7 +4,7 @@ import "../../styles/transaction-history-card.css";
 export default function TransactionHistoryCard() {
   return (
     <>
-      <Card style={{ width: "53rem", height: "5rem" }}>
+      <Card style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="transaction-card-body">
             Siddesh paid you Rs.200
@@ -16,7 +16,7 @@ export default function TransactionHistoryCard() {
         </Card.Body>
       </Card>
       <br />
-      <Card style={{ width: "53rem", height: "5rem" }}>
+      <Card style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="transaction-card-body">
             You paid Aarushi Rs.200

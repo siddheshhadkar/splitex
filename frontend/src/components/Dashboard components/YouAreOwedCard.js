@@ -4,10 +4,10 @@ import "../../styles/you-are-owed-card.css";
 export default function YouAreOwedCard() {
   return (
     <>
-      <Card style={{ width: "25rem", height: "25rem" }}>
+      <Card style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="card-title">You are owed</Card.Title>
-          <Card style={{ width: "23rem", height: "5.5rem" }}>
+          <Card style={{ width: "auto", height: "auto" }}>
             <Card.Body>
               <Card.Text className="owed-card-text">
                 Siddhesh
@@ -16,7 +16,7 @@ export default function YouAreOwedCard() {
             </Card.Body>
           </Card>
           <br />
-          <Card style={{ width: "23rem", height: "5.5rem" }}>
+          <Card style={{ width: "auto", height: "auto" }}>
             <Card.Body>
               <Card.Text className="owed-card-text">
                 Priyansh

@@ -4,7 +4,7 @@ import "../../styles/balance-card.css";
 export default function BalanceCard() {
   return (
     <>
-      <Card style={{ width: "20rem", height: "20rem", marginLeft: "20%" }}>
+      <Card style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="right-section-card-title">
             Your balance
