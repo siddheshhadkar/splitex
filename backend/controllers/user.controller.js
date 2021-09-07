@@ -1,15 +1,12 @@
 const jwt = require("jsonwebtoken");
-
 const {
   createUser,
   findUser,
   addBalance,
 } = require("../services/user.services");
-
-const { checkPassword } = require("./../helpers/index");
+const { checkPassword } = require("./../helpers");
 
 const postUser = async (req, res) => {
-  // const name = req.body.name;   //fetch user obj here
   user = {
     name: req.body.name,
     email: req.body.email,
@@ -27,18 +24,10 @@ const postUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  // const name = req.body.name;   //fetch user obj here
-  user = {
-    email: req.user.email,
-  };
   try {
-    const result = await findUser(user);
+    const result = await findUser(req.user.email);
     console.log(result);
-    return res.status(200).json({
-      success: true,
-      name: result.data.name,
-      email: result.data.email,
-    });
+    return res.status(200).json({ data: result.data, success: true });
   } catch (e) {
     return res
       .status(e.statusCode)
@@ -47,13 +36,8 @@ const getUser = async (req, res) => {
 };
 
 const putBalance = async (req, res) => {
-  // const name = req.body.name;   //fetch user obj here
-  user = {
-    email: req.user.email,
-  };
-  amount = req.body.addBalance;
   try {
-    const result = await addBalance(user, amount);
+    await addBalance(req.user.email, req.body.amount);
     return res.status(200).json({ success: true });
   } catch (e) {
     return res
@@ -66,9 +50,7 @@ const getToken = async (req, res) => {
   const password = req.body.password;
   let result;
   try {
-    result = await findUser({
-      email: req.body.email,
-    });
+    result = await findUser(req.body.email);
   } catch (e) {
     return res
       .status(e.statusCode)
@@ -78,23 +60,21 @@ const getToken = async (req, res) => {
   const passwordHash = user.password;
   if (await checkPassword(password, passwordHash)) {
     const payload = {
-      id: user.id,
+      id: user._id,
+      name: user.name,
       email: user.email,
     };
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: 3000 },
+      { expiresIn: 300 },
       (err, token) => {
         if (!err) {
-          return res.status(200).json({
-            data: {
-              token: token,
-              name: user.name,
-              user_id: user.id,
-            },
-            success: true,
-          });
+          return res.status(200).json({ data: token, success: true });
+        } else {
+          return res
+            .status(400)
+            .json({ errorMessage: "Error signing token", success: false });
         }
       }
     );

@@ -1,7 +1,6 @@
 const { dbCreateUser, dbGetUser, dbAddBalance } = require("../db/user.db");
 
 const createUser = async (user) => {
-  // modify user obj here(as required)
   try {
     return await dbCreateUser(user);
   } catch (e) {
@@ -9,19 +8,17 @@ const createUser = async (user) => {
   }
 };
 
-const findUser = async (user) => {
-  // modify user obj here(as required)
+const findUser = async (email) => {
   try {
-    return await dbGetUser(user);
+    return await dbGetUser(email);
   } catch (e) {
     throw e;
   }
 };
 
-const addBalance = async (user, amount) => {
-  // modify user obj here(as required)
+const addBalance = async (email, amount) => {
   try {
-    return await dbAddBalance(user, amount);
+    return await dbAddBalance(email, amount);
   } catch (e) {
     throw e;
   }

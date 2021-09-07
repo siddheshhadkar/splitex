@@ -1,10 +1,8 @@
-const mongoose = require("mongoose");
+const mongoose = require("../db/db.config");
+const { Schema } = mongoose;
 require("mongoose-type-email");
 
-const uri = process.env.DB_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -22,4 +20,5 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 module.exports = mongoose.model("User", userSchema);

@@ -1,14 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const getPasswordHash = async (req, res, next) => {
-  password = req.body.password;
-  const salt = await bcrypt.genSalt(10);
-  req["passwordHash"] = {};
-  req.passwordHash = await bcrypt.hash(password, salt);
-  return next();
-};
-
 const checkPassword = async (password, passwordHash) => {
   return await bcrypt.compare(password, passwordHash);
 };
@@ -31,7 +23,6 @@ const validateToken = (req, res, next) => {
 };
 
 module.exports = {
-  getPasswordHash,
   checkPassword,
   validateToken,
 };

@@ -1,7 +1,10 @@
 const router = require("express").Router();
 const {
   registerFieldsCheck,
+  loginFieldsCheck,
+  balanceFieldCheck,
   validateFields,
+  getPasswordHash,
 } = require("../../middlewares/user.middleware");
 const {
   postUser,
@@ -9,7 +12,9 @@ const {
   putBalance,
   getToken,
 } = require("../../controllers/user.controller");
-const { validateToken, getPasswordHash } = require("../../helpers");
+const { validateToken } = require("../../helpers");
+
+router.post("/login", loginFieldsCheck, validateFields, getToken);
 
 router.post(
   "/",
@@ -18,8 +23,9 @@ router.post(
   getPasswordHash,
   postUser
 );
+
 router.get("/", validateToken, getUser);
-router.put("/", validateToken, putBalance);
-router.post("/login", registerFieldsCheck, validateFields, getToken);
+
+router.put("/", balanceFieldCheck, validateFields, validateToken, putBalance);
 
 module.exports = router;
