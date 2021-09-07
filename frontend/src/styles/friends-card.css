@@ -1,0 +1,23 @@
+
+.title-separator{
+    margin-top: 0px;
+    color:#3B0A79;
+    height:3px !important;
+}
+
+.right-section-card-title{
+    text-align: center;
+      color:#3B0A79;
+        font-size: 30px;
+}
+
+.friends-text{
+    color:#3B0A79;
+    font-size: 20px;
+}
+
+.friends-card{
+    bottom:24px;
+}
+
+

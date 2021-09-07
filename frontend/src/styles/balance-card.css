@@ -1,0 +1,33 @@
+
+.balance-div{
+        color:#3B0A79;
+        font-size: 50px;
+        position: relative;
+        
+        text-align: center;
+
+}
+
+.add-balance-btn{
+        font-size: 20px;
+        width: 200px;
+        position: relative;
+        text-align: center;
+        top:170px;
+        left:82px;
+}
+
+.title-separator{
+    margin-top: 0px;
+    color:#3B0A79;
+    height:3px !important;
+}
+
+.right-section-card-title{
+    text-align: center;
+      color:#3B0A79;
+        font-size: 30px;
+}
+
+
+
