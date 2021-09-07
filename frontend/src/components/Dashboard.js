@@ -1,12 +1,12 @@
-import React from 'react';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import DashboardNavbar from './DashboardNavbar';
-import '../styles/dashboard.css';
-import YouOweCard from './YouOweCard';
-import YouAreOwedCard from './YouAreOwedCard';
-import TransactionHistoryCard from './TransactionHistoryCard';
-import FriendsCard from './FriendsCard';
-import BalanceCard from './BalanceCard';
+import React from "react";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import DashboardNavbar from "./DashboardNavbar";
+import "../styles/dashboard.css";
+import YouOweCard from "./Dashboard components/YouOweCard";
+import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
+import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCard";
+import FriendsCard from "./Dashboard components/FriendsCard";
+import BalanceCard from "./Dashboard components/BalanceCard";
 
 export default function Dashboard() {
   return (
@@ -19,9 +19,7 @@ export default function Dashboard() {
             <Button className="add-expense-btn"> Add an expense</Button>
             <hr className="page-title-separator" />
           </Col>
-          <Col xs={12} md={4}>
-
-          </Col>
+          <Col xs={12} md={4}></Col>
         </Row>
         <Row>
           <Col xs={12} md={4}>
@@ -40,23 +38,18 @@ export default function Dashboard() {
             <h2 className="label">Transaction History</h2>
             <hr className="separator" />
           </Col>
-          <Col xs={12} md={4}>
-
-          </Col>
+          <Col xs={12} md={4}></Col>
         </Row>
         <Row>
           <Col xs={12} md={8}>
             <TransactionHistoryCard />
           </Col>
 
-
           <Col xs={12} md={4}>
             <br />
             <FriendsCard />
           </Col>
         </Row>
-
-
       </Container>
     </>
   );

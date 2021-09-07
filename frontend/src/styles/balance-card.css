@@ -1,18 +1,15 @@
 .balance-div {
   color: #3b0a79;
-  font-size: 50px;
-  position: relative;
-
+  font-size: 35px;
   text-align: center;
+  margin-top: 20%;
 }
 
 .add-balance-btn {
-  font-size: 20px;
-  width: 200px;
-  position: relative;
+  width: max-content;
   text-align: center;
-  top: 170px;
-  left: 82px;
+  margin-left: 30%;
+  margin-top: 20%;
 }
 
 .title-separator {
@@ -24,5 +21,5 @@
 .right-section-card-title {
   text-align: center;
   color: #3b0a79;
-  font-size: 30px;
+  font-size: 25px;
 }
