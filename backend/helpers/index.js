@@ -1,9 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const getPasswordHash = async (password) => {
+const getPasswordHash = async (req, res, next) => {
+  password = req.body.password;
   const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
+  req["passwordHash"] = {};
+  req.passwordHash = await bcrypt.hash(password, salt);
+  return next();
 };
 
 const checkPassword = async (password, passwordHash) => {
