@@ -26,7 +26,6 @@ const dbGetUser = async (user) => {
 const dbAddBalance = async (user, amount) => {
   // db logic
   try {
-    console.log(user, amount);
     await User.updateOne(user, { $inc: { balance: amount } });
     return { statusCode: 200 };
   } catch (e) {
