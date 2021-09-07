@@ -1,0 +1,21 @@
+.navbar-colour {
+  background-color: #3b0a79;
+}
+
+.siteName {
+  font-weight: bold;
+  text-shadow: 1px 1px;
+  margin-left: 40px;
+  font-style: normal;
+  font-size: 23px;
+}
+
+.logoutBtn {
+  background: #df2828;
+  margin-right: 20px;
+  width: 90px;
+}
+
+.userName {
+  margin-left: 80%;
+}

@@ -12,5 +12,8 @@
   "devDependencies": {
     "concurrently": "^6.2.1",
     "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "react-hook-form": "^7.15.0"
   }
 }
