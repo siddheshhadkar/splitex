@@ -1,0 +1,14 @@
+.card-title {
+  color: #3b0a79;
+  font-size: 30px;
+}
+
+.owed-card-text {
+  position: relative;
+  top: 15px;
+  color: #3b0a79;
+}
+
+.owed-card-amount {
+  float: right;
+}

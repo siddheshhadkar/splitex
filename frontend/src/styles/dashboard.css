@@ -1,0 +1,19 @@
+.label {
+  display: inline-block;
+  color: #3b0a79;
+  margin-top: 10px;
+}
+
+.page-title-separator {
+  margin-top: 0px;
+  color: #3b0a79;
+  height: 3px !important;
+}
+
+.add-expense-btn {
+  margin-top: 10px;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  float: right;
+}
