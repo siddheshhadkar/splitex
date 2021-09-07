@@ -1,14 +1,11 @@
-
-
-.transaction-card-body{
-    font-size: 20px;
-    margin-top: 10px;
+.transaction-card-body {
+  font-size: 20px;
+  margin-top: 10px;
 }
 
-.transaction-card-date{
-    float:right;
-    position: relative;
-    bottom:29px;
-    color:gray;
+.transaction-card-date {
+  float: right;
+  position: relative;
+  bottom: 29px;
+  color: gray;
 }
-

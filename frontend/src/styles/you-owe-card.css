@@ -1,27 +1,20 @@
-
-.owe-card-text{
-    position: relative;
-    color:#3B0A79;
-    bottom:7px;
+.owe-card-text {
+  position: relative;
+  color: #3b0a79;
+  bottom: 7px;
 }
 
-.pay-button-div{
-    position: relative;
-    bottom:30px;
-    float: right;
+.pay-button-div {
+  position: relative;
+  bottom: 30px;
+  float: right;
 }
 
-.pay-button{
-    background-color: red;
-    color:white;
-    width:100px;
-    height:40px;
-    border-radius: 10px;
-    border:none;
-
+.pay-button {
+  background-color: red;
+  color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
 }
-
-
-
-
-

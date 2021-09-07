@@ -1,15 +1,14 @@
-
-.card-title{
-        color:#3B0A79;
-        font-size: 30px;
+.card-title {
+  color: #3b0a79;
+  font-size: 30px;
 }
 
-.owed-card-text{
-    position: relative;
-    top:15px;
-    color:#3B0A79;
+.owed-card-text {
+  position: relative;
+  top: 15px;
+  color: #3b0a79;
 }
 
-.owed-card-amount{
-    float:right;
+.owed-card-amount {
+  float: right;
 }
