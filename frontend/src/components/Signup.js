@@ -14,12 +14,18 @@ function Signup() {
 
         <Form.Group className="mb-3" controlId="name">
           <Form.Label style={{ color: "white" }}>Name</Form.Label>
-          <Form.Control type="email" placeholder="Enter your name" required />
+          <Form.Control
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="email">
           <Form.Label style={{ color: "white" }}>Email address</Form.Label>
           <Form.Control
+            id="email"
             type="email"
             placeholder="Enter email address"
             required
@@ -28,7 +34,12 @@ function Signup() {
 
         <Form.Group className="mb-3" controlId="password">
           <Form.Label style={{ color: "white" }}>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" required />
+          <Form.Control
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
         </Form.Group>
 
         <Button className="btnLogin" type="submit">

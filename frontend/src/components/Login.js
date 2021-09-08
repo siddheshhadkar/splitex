@@ -7,28 +7,36 @@ function Login() {
   return (
     <>
       <LandingNavbar />
-      <Form className="form">
-        <div>
-          <h3> Login </h3>
-        </div>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label style={{ color: "white" }}>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email address"
-            required
-          />
-        </Form.Group>
+      <div className="center">
+        <Form className="form">
+          <div>
+            <h3> Login </h3>
+          </div>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label style={{ color: "white" }}>Email address</Form.Label>
+            <Form.Control
+              id="email"
+              type="email"
+              placeholder="Enter email address"
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label style={{ color: "white" }}>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" required />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label style={{ color: "white" }}>Password</Form.Label>
+            <Form.Control
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+          </Form.Group>
 
-        <Button className="btnLogin" type="submit">
-          Login
-        </Button>
-      </Form>
+          <Button className="btnLogin" type="submit">
+            Login
+          </Button>
+        </Form>
+      </div>
     </>
   );
 }
