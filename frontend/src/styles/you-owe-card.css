@@ -18,3 +18,8 @@
   border-radius: 10px;
   border: none;
 }
+
+.label-style {
+  font-weight: bold;
+  margin: 10px;
+}

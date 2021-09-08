@@ -12,7 +12,7 @@ export default function Dashboard() {
   return (
     <>
       <DashboardNavbar />
-      <Container>
+      <Container className="bg">
         <Row>
           <Col xs={12} md={8}>
             <h2 className="label">Payments</h2>

@@ -57,22 +57,26 @@ export default function YouOweCard() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Settle Bills</Modal.Title>
+          <Modal.Title style={{ color: "#3B0A79" }}>Settle Bills</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>Paying to: </label>
+          <label className="label-style">Paying to: </label>
           <input type="text" name="payingTo" />
           <br />
-          <label>Amount: </label>
+          <label className="label-style">Amount: </label>
           <input type="text" name="amount" />
           <br />
-          <label>Choose payment option: </label>
+          <label className="label-style">Choose payment option: </label>
           <br></br>
-          <input type="radio" name="payMode1" /> 
-          <label for="payMode1">UPI/Wallet</label>
+          <input type="radio" name="payMode" /> 
+          <label for="payMode1" style={{ margin: "10px" }}>
+            UPI/Wallet
+          </label>
           <br></br>
-          <input type="radio" name="payMode2" /> 
-          <label for="payMode2">Credit Card/ Debit Card</label>
+          <input type="radio" name="payMode" /> 
+          <label for="payMode2" style={{ margin: "10px" }}>
+            Credit Card/ Debit Card
+          </label>
           <br></br>
         </Modal.Body>
         <Modal.Footer>
