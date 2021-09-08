@@ -6,14 +6,10 @@ const addTransactionFieldsCheck = [
     .isLength({
       min: 3,
     }),
-  // body("date").optional().trim().isISO8601(),
-  body("totalAmount").isInt().isNumeric(),
-  // body("owner.ownerId").trim().notEmpty(),
+  body("totalAmount").isNumeric(),
   body("owner.amount").isNumeric(),
   body("friends.*.userId").trim().notEmpty(),
   body("friends.*.amount").isNumeric(),
-  // body("friends.*.paymentStatus").isBoolean(),
-  // body("friends.*.settledDate").optional().trim().isISO8601(),
 ];
 
 const settleTransactionFieldsCheck = [body("transactionId").trim().notEmpty()];
