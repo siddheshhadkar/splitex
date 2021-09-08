@@ -27,7 +27,6 @@ const postUser = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const result = await findUser(req.user.email);
-    console.log(result);
     return res.status(200).json({ data: result.data, success: true });
   } catch (e) {
     return res

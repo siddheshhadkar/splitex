@@ -34,8 +34,7 @@ const dbUpdateTransaction = async (transactionId, friendId) => {
   const amount = await Transaction.findOne(
     { _id: transactionId, "friends.userId": friendId },
     { "friends.$": 1, "owner.ownerId": 1 }
-  ).catch((e) => {
-    console.log(e);
+  ).catch(() => {
     throw {
       errorMessage: "Error fetching transaction amount",
       statusCode: 500,
@@ -66,8 +65,7 @@ const dbUpdateTransaction = async (transactionId, friendId) => {
       },
     },
     { new: true }
-  ).catch((e) => {
-    console.log(e);
+  ).catch(() => {
     throw { errorMessage: "Error fetching transactions", statusCode: 500 };
   });
 

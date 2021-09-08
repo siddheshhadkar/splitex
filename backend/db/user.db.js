@@ -23,6 +23,7 @@ const dbGetUser = async (email) => {
       name: 1,
       email: 1,
       password: 1,
+      balance: 1,
     })
     .catch(() => {
       throw { errorMessage: "Error fetching user", statusCode: 500 };
