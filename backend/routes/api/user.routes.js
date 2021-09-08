@@ -11,10 +11,13 @@ const {
   getUser,
   putBalance,
   getToken,
+  getAllUsers,
 } = require("../../controllers/user.controller");
 const { validateToken } = require("../../helpers");
 
 router.post("/login", loginFieldsCheck, validateFields, getToken);
+
+router.get("/all", validateToken, getAllUsers)
 
 router.post(
   "/",

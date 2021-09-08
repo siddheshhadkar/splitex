@@ -45,8 +45,14 @@ const dbAddBalance = async (email, amount) => {
   }
 };
 
+const dbFetchAllUsers = async () => {
+  const query = await User.find({}).select({ name: 1, email: 1 });
+  return query;
+};
+
 module.exports = {
   dbCreateUser,
   dbGetUser,
   dbAddBalance,
+  dbFetchAllUsers,
 };

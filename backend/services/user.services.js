@@ -1,4 +1,4 @@
-const { dbCreateUser, dbGetUser, dbAddBalance } = require("../db/user.db");
+const { dbCreateUser, dbGetUser, dbAddBalance, dbFetchAllUsers } = require("../db/user.db");
 
 const createUser = async (user) => {
   try {
@@ -24,8 +24,17 @@ const addBalance = async (email, amount) => {
   }
 };
 
+const fetchAllUsers = async () => {
+  try {
+    return await dbFetchAllUsers();
+  } catch (e) {
+    throw e;
+  }
+};
+
 module.exports = {
   createUser,
   findUser,
   addBalance,
+  fetchAllUsers,
 };

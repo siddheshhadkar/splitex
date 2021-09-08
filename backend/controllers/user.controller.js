@@ -3,6 +3,7 @@ const {
   createUser,
   findUser,
   addBalance,
+  fetchAllUsers,
 } = require("../services/user.services");
 const { checkPassword } = require("./../helpers");
 
@@ -85,9 +86,21 @@ const getToken = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await fetchAllUsers();
+    return res.status(200).json({ data: users, success: true });
+  } catch (e) {
+    return res
+      .status(e.statusCode)
+      .json({ errorMessage: e.errorMessage, success: false });
+  }
+};
+
 module.exports = {
   postUser,
   getUser,
   putBalance,
   getToken,
+  getAllUsers,
 };
