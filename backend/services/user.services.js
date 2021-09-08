@@ -1,4 +1,9 @@
-const { dbCreateUser, dbGetUser, dbAddBalance, dbFetchAllUsers } = require("../db/user.db");
+const {
+  dbCreateUser,
+  dbGetUser,
+  dbAddBalance,
+  dbFetchAllUsers,
+} = require("../db/user.db");
 
 const createUser = async (user) => {
   try {
@@ -24,9 +29,11 @@ const addBalance = async (email, amount) => {
   }
 };
 
-const fetchAllUsers = async () => {
+const fetchAllUsers = async (email) => {
   try {
-    return await dbFetchAllUsers();
+    const users = await dbFetchAllUsers();
+    const filteredUsers = users.filter((user) => user.email !== email);
+    return { data: filteredUsers, statusCode: 200 };
   } catch (e) {
     throw e;
   }

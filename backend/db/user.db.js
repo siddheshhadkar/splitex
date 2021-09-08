@@ -37,16 +37,20 @@ const dbGetUser = async (email) => {
 };
 
 const dbAddBalance = async (email, amount) => {
-  try {
-    await User.updateOne({ email: email }, { $inc: { balance: amount } });
-    return { statusCode: 200 };
-  } catch (e) {
-    throw { errorMessage: "Malformed query", statusCode: 400 };
-  }
+  await User.updateOne({ email: email }, { $inc: { balance: amount } }).catch(
+    () => {
+      throw { errorMessage: "Error fetching all users", statusCode: 500 };
+    }
+  );
+  return { statusCode: 200 };
 };
 
 const dbFetchAllUsers = async () => {
-  const query = await User.find({}).select({ name: 1, email: 1 });
+  const query = await User.find({})
+    .select({ _id: 0, name: 1, email: 1 })
+    .catch(() => {
+      throw { errorMessage: "Error fetching all users", statusCode: 500 };
+    });
   return query;
 };
 

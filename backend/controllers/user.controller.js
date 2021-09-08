@@ -88,8 +88,8 @@ const getToken = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await fetchAllUsers();
-    return res.status(200).json({ data: users, success: true });
+    const users = await fetchAllUsers(req.user.email);
+    return res.status(200).json({ data: users.data, success: true });
   } catch (e) {
     return res
       .status(e.statusCode)
