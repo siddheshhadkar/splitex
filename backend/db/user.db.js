@@ -39,7 +39,7 @@ const dbGetUser = async (email) => {
 const dbAddBalance = async (email, amount) => {
   await User.updateOne({ email: email }, { $inc: { balance: amount } }).catch(
     () => {
-      throw { errorMessage: "Error fetching all users", statusCode: 500 };
+      throw { errorMessage: "Error adding amount to wallet", statusCode: 500 };
     }
   );
   return { statusCode: 200 };
@@ -47,7 +47,7 @@ const dbAddBalance = async (email, amount) => {
 
 const dbFetchAllUsers = async () => {
   const query = await User.find({})
-    .select({ _id: 0, name: 1, email: 1 })
+    .select({ _id: 1, name: 1, email: 1 })
     .catch(() => {
       throw { errorMessage: "Error fetching all users", statusCode: 500 };
     });
