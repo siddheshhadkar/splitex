@@ -35,12 +35,12 @@ export default function BalanceCard() {
           <br />
           <label className="label-style">Choose payment option: </label>
           <br></br>
-          <input type="radio" name="payMode" /> 
+          <input type="radio" name="payMode" />
           <label for="payMode1" style={{ margin: "5px" }}>
             UPI/Wallet
           </label>
           <br></br>
-          <input type="radio" name="payMode" /> 
+          <input type="radio" name="payMode" />
           <label for="payMode2" style={{ margin: "5px" }}>
             Credit Card/ Debit Card
           </label>
