@@ -63,51 +63,54 @@ export default function Dashboard(props) {
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "#3B0A79" }}>Add an Expense</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
-          <label for="friend_name" className="label-style">
-            With you and:{" "}
-          </label>
-          <input type="text" name="friend_name" />
-          <br />
-          <label for="description" className="label-style">
-            Description:{" "}
-          </label>
-          <input type="text" name="description" />
-          <br />
-          <label for="amount" style={{ margin: "5px" }}>
-            Amount
-          </label>
-          <input type="text" name="amount" />
-          <br />
-          <label for="paid_by" style={{ margin: "5px" }}>
-            Paid by
-          </label>
-          <input type="text" name="paid_by" />
-          <br />
-          <label for="split" style={{ margin: "5px" }}>
-            Split
-          </label>
-          <br />
-          <input type="radio" name="equally" />
-          Equally &nbsp;
-          <input type="radio" name="unequally" />
-          Unequally
-          <br />
-          <label for="owner_amount" className="label-style">
-            You{" "}
-          </label>
-          <input type="text" name="owner_amount" />
-          <br />
-          <label for="friend1_amount" className="label-style">
-            Monali
-          </label>
-          <input type="text" name="friend1_amount" />
-          <br />
-          <label for="friend1_amount" style={{ margin: "5px" }}>
-            Aarushi
-          </label>
-          <input type="text" name="friend2_amount" />
+          <div className="form-element">
+            <label for="friend_name" className="label-style-add-expense">With you and: </label>
+            <input type="text" name="friend_name" />
+
+            <label for="description" className="label-style-add-expense">Description: </label>
+            <input type="text" name="description" />
+
+            <label for="amount" className="label-style-add-expense" style={{}}>
+              Amount
+            </label>
+            <input type="text" name="amount" />
+
+            <label for="paid_by" className="label-style-add-expense" style={{}}>
+              Paid by
+            </label>
+            <input type="text" name="paid_by" />
+
+            <label for="split" className="label-style-add-expense" style={{}}>
+              Split
+            </label>
+
+            <input type="radio" name="split" className="split-input" />
+
+            <span className="label-style-split" style={{}}>
+              Equally
+            </span>
+            <input type="radio" name="split" className="split-input" />
+            <span className="label-style-split" style={{}}>
+              Unequally
+            </span>
+            <br />
+
+            <label for="owner_amount" className="label-style-add-expense">You </label>
+            <input type="text" name="owner_amount" />
+
+            <label for="friend1_amount" className="label-style-add-expense">Monali</label>
+            <input type="text" name="friend1_amount" />
+
+            <label className="label-style-add-expense" for="friend1_amount" style={{}}>
+              Aarushi
+            </label>
+
+            <input type="text" name="friend2_amount" />
+          </div>
         </Modal.Body>
+
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>
           <Button onClick={handleClose}>Pay</Button>
