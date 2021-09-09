@@ -5,6 +5,8 @@ import {
   BrowserRouter as Router,
   Redirect,
 } from "react-router-dom";
+
+import GetUserService from "./services/GetUserService";
 import LandingPage from "./components/LandingPage";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
@@ -12,6 +14,18 @@ import Signup from "./components/Signup";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (localStorage.getItem("token") !== null && !isLoggedIn) {
+    (async () => {
+      const resultUser = await GetUserService(localStorage.getItem("token"));
+      if (resultUser.success && resultUser.data) {
+        setIsLoggedIn(true);
+        console.log(resultUser.data);
+      } else {
+        alert(resultUser.errorMessage);
+      }
+    })();
+  }
 
   const toggleLogInState = () => {
     setIsLoggedIn((prevState) => !prevState);

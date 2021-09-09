@@ -1,13 +1,14 @@
 import axios from "./axiosConfig";
 
-export default async function LogInService(data) {
+export default async function GetUserService(token) {
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
+    Authorization: `bearer ${token}`,
   };
 
   try {
-    const response = await axios.post("/user/login", data, { headers });
+    const response = await axios.get("/user", { headers });
     return response.data;
   } catch (e) {
     return e.response.data;
