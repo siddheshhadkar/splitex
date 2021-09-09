@@ -9,19 +9,21 @@ import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCar
 import FriendsCard from "./Dashboard components/FriendsCard";
 import BalanceCard from "./Dashboard components/BalanceCard";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
-      <DashboardNavbar />
+      <DashboardNavbar toggleLogInState={props.toggleLogInState} />
       <Container className="bg">
         <Row>
           <Col xs={12} md={8}>
             <h2 className="label">Payments</h2>
-            <Button className="add-expense-btn" onClick={handleShow}>Add an expense</Button>
+            <Button className="add-expense-btn" onClick={handleShow}>
+              Add an expense
+            </Button>
             <hr className="page-title-separator" />
           </Col>
           <Col xs={12} md={4}></Col>
@@ -62,10 +64,14 @@ export default function Dashboard() {
           <Modal.Title style={{ color: "#3B0A79" }}>Add an Expense</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label for="friend_name" className="label-style">With you and: </label>
+          <label for="friend_name" className="label-style">
+            With you and:{" "}
+          </label>
           <input type="text" name="friend_name" />
           <br />
-          <label for="description" className="label-style">Description: </label>
+          <label for="description" className="label-style">
+            Description:{" "}
+          </label>
           <input type="text" name="description" />
           <br />
           <label for="amount" style={{ margin: "5px" }}>
@@ -83,15 +89,18 @@ export default function Dashboard() {
           </label>
           <br />
           <input type="radio" name="equally" />
-          Equally
-          &nbsp;
+          Equally &nbsp;
           <input type="radio" name="unequally" />
           Unequally
           <br />
-          <label for="owner_amount" className="label-style">You </label>
+          <label for="owner_amount" className="label-style">
+            You{" "}
+          </label>
           <input type="text" name="owner_amount" />
           <br />
-          <label for="friend1_amount" className="label-style">Monali</label>
+          <label for="friend1_amount" className="label-style">
+            Monali
+          </label>
           <input type="text" name="friend1_amount" />
           <br />
           <label for="friend1_amount" style={{ margin: "5px" }}>
@@ -104,8 +113,6 @@ export default function Dashboard() {
           <Button onClick={handleClose}>Pay</Button>
         </Modal.Footer>
       </Modal>
-
-
     </>
   );
 }

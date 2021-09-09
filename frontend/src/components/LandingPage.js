@@ -9,15 +9,14 @@ function LandingPage() {
     <>
       <LandingNavbar />
       <Container fluid="md" className="mt-5">
-        <Row className="h-100">
+        <Row>
           <Col xs={12} sm={6} className="my-auto">
-            <div className="">
+            <div>
               <h1>
                 Relieve yourself from the hassle of remembering bills shared!
               </h1>
               <br />
-              <br />
-              <div className="">
+              <div>
                 <p className="lead">
                   Introducing SplitEx, a complete <br /> solution for all your
                   bill splitting needs!
@@ -25,8 +24,8 @@ function LandingPage() {
               </div>
             </div>
           </Col>
-          <Col xs={12} sm={6}>
-            <Image className="" src={heroImage} alt="SVG" fluid />
+          <Col xs={12} sm={6} className="my-auto">
+            <Image src={heroImage} alt="SVG" fluid />
           </Col>
         </Row>
       </Container>
