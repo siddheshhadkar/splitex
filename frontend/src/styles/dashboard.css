@@ -16,8 +16,26 @@
 
 .add-expense-btn {
   margin-top: 4%;
-  width: 150px;
-  height: 40px;
+  width: 20%;
+  height: 40%;
   border-radius: 5px;
   float: right;
+}
+
+.form-element label {
+  display: inline-block;
+  width: 150px;
+}
+
+.label-style-add-expense {
+  margin-top: 5%;
+}
+
+.split-input{
+  margin-right: 1%;
+}
+
+.label-style-split{
+  margin-left: 1%;
+  margin-right: 2%;
 }
