@@ -4,8 +4,20 @@
   font-size: 23px;
 }
 
-.btn {
-  background: #3b0a79;
-  margin-right: 20px;
-  width: 90px;
+.btn-login {
+  text-decoration: none;
+  color: white;
+  font-size: larger;
+  float: right;
+  font-weight: 500;
+}
+
+.btn-signup {
+  text-decoration: none;
+  color: white;
+  font-size: larger;
+  margin-right: 5%;
+  margin-left: 3%;
+  float: right;
+  font-weight: 500;
 }

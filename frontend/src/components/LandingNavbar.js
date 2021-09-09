@@ -15,14 +15,12 @@ export default function LandingNavbar() {
           </NavLink>
         </Container>
 
-        <NavLink to="/login" style={{ textDecoration: "none" }}>
-          <Button className="btn"> Login </Button>
+        <NavLink to="/login" className="btn-login">
+          Login
         </NavLink>
 
-        <NavLink to="/signup" style={{ textDecoration: "none" }}>
-          <Button className="btn" style={{ marginRight: 50 }}>
-            SignUp
-          </Button>
+        <NavLink to="/signup" className="btn-signup">
+          SignUp
         </NavLink>
       </Navbar>
     </>

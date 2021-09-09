@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Container, Button } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import "../styles/dashboardNavbar.css";
 import { NavLink } from "react-router-dom";
 
@@ -11,30 +11,27 @@ function DashboardNavbar(props) {
 
   return (
     <>
-      <Navbar className="navbar-colour">
+      <Navbar className="navbar-colour" expand="lg">
         <Container>
           <NavLink to="/" style={{ textDecoration: "none" }}>
             <Navbar.Brand className="siteName" style={{ color: "#FFFFFF" }}>
               SplitEx
             </Navbar.Brand>
           </NavLink>
-        </Container>
 
-        <Container>
-          <Navbar.Brand className="userName" style={{ color: "#F5F5F5" }}>
-            John Doe
-          </Navbar.Brand>
-        </Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {/* <Container> */}
+            <Navbar.Brand className="userName" style={{ color: "#F5F5F5" }}>
+              Sample
+            </Navbar.Brand>
 
-        <NavLink to="/" style={{ textDecoration: "none" }}>
-          <Button
-            className="logoutBtn"
-            style={{ marginRight: 50 }}
-            onClick={logOutHandler}
-          >
-            Logout
-          </Button>
-        </NavLink>
+            <NavLink to="/" className="logoutBtn" onClick={logOutHandler}>
+              Logout
+            </NavLink>
+            {/* </Container> */}
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
     </>
   );

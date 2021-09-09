@@ -1,14 +1,15 @@
 .balance-div {
   color: #3b0a79;
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
-  margin-top: 20%;
+  margin: 10%;
 }
 
 .add-balance-btn {
+  background-color: #3b0a79;
   width: max-content;
-  margin-left: 35%;
-  margin-top: 20%;
+  margin: auto;
+  display: flex;
 }
 
 .title-separator {
