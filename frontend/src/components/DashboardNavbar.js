@@ -3,7 +3,12 @@ import { Navbar, Container, Button } from "react-bootstrap";
 import "../styles/dashboardNavbar.css";
 import { NavLink } from "react-router-dom";
 
-function DashboardNavbar() {
+function DashboardNavbar(props) {
+  const logOutHandler = () => {
+    localStorage.removeItem("token");
+    props.toggleLogInState();
+  };
+
   return (
     <>
       <Navbar className="navbar-colour">
@@ -22,7 +27,11 @@ function DashboardNavbar() {
         </Container>
 
         <NavLink to="/" style={{ textDecoration: "none" }}>
-          <Button className="logoutBtn" style={{ marginRight: 50 }}>
+          <Button
+            className="logoutBtn"
+            style={{ marginRight: 50 }}
+            onClick={logOutHandler}
+          >
             Logout
           </Button>
         </NavLink>
