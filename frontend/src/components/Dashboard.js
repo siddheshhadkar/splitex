@@ -21,7 +21,11 @@ export default function Dashboard(props) {
         <Row>
           <Col xs={12} md={8}>
             <h2 className="label">Payments</h2>
-            <Button className="add-expense-btn" onClick={handleShow}>
+            <Button
+              className="add-expense-btn"
+              style={{ width: "max-content" }}
+              onClick={handleShow}
+            >
               Add an expense
             </Button>
             <hr className="page-title-separator" />
@@ -66,10 +70,14 @@ export default function Dashboard(props) {
 
         <Modal.Body>
           <div className="form-element">
-            <label for="friend_name" className="label-style-add-expense">With you and: </label>
+            <label for="friend_name" className="label-style-add-expense">
+              With you and:{" "}
+            </label>
             <input type="text" name="friend_name" />
 
-            <label for="description" className="label-style-add-expense">Description: </label>
+            <label for="description" className="label-style-add-expense">
+              Description:{" "}
+            </label>
             <input type="text" name="description" />
 
             <label for="amount" className="label-style-add-expense" style={{}}>
@@ -97,13 +105,21 @@ export default function Dashboard(props) {
             </span>
             <br />
 
-            <label for="owner_amount" className="label-style-add-expense">You </label>
+            <label for="owner_amount" className="label-style-add-expense">
+              You{" "}
+            </label>
             <input type="text" name="owner_amount" />
 
-            <label for="friend1_amount" className="label-style-add-expense">Monali</label>
+            <label for="friend1_amount" className="label-style-add-expense">
+              Monali
+            </label>
             <input type="text" name="friend1_amount" />
 
-            <label className="label-style-add-expense" for="friend1_amount" style={{}}>
+            <label
+              className="label-style-add-expense"
+              for="friend1_amount"
+              style={{}}
+            >
               Aarushi
             </label>
 
