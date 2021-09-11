@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import "../../styles/you-are-owed-card.css";
 export default function YouAreOwedCard() {
@@ -21,11 +21,9 @@ export default function YouAreOwedCard() {
         className="card-style"
         key={index}
       >
-        <Card.Body>
-          <Card.Text className="owed-card-text">
-            {card.name}
-            <div className="owed-card-amount">Rs. {card.amount}</div>
-          </Card.Text>
+        <Card.Body className="owed-card-text">
+          {card.name}
+          <div className="owed-card-amount">Rs. {card.amount}</div>
         </Card.Body>
       </Card>
     );
