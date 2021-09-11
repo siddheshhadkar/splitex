@@ -1,13 +1,18 @@
 .card-title {
   color: #3b0a79;
-  font-size: 30px;
+  font-size: 25px;
+  margin-bottom: 5%;
 }
 
 .owed-card-text {
-
   color: #3b0a79;
 }
 
 .owed-card-amount {
   float: right;
+}
+
+.card-style:hover {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }

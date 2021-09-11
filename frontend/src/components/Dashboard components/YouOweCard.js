@@ -7,51 +7,57 @@ export default function YouOweCard() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const youOwe = [
+    {
+      name: "Monali",
+      description: "Lunch",
+      amount: "300",
+    },
+    {
+      name: "Priyansh",
+      description: "Dinner",
+      amount: "500",
+    },
+  ];
+
+  const renderCard = (card, index) => {
+    return (
+      <Card
+        style={{ width: "auto", height: "auto", marginBottom: "3%" }}
+        className="card-style"
+      >
+        <Card.Body>
+          <Card.Text className="owe-card-text">
+            <strong> {card.name} </strong> <br />
+            {card.description} <br />
+            Rs. {card.amount}
+            <div className="pay-button-div">
+              <button className="pay-button" onClick={handleShow}>
+                Pay
+              </button>
+            </div>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    );
+  };
+
   return (
     <>
-      <Card style={{ width: "auto", height: "auto" }}>
+      <Card
+        style={{
+          width: "auto",
+          height: "300px",
+          overflowY: "scroll",
+        }}
+      >
         <Card.Body>
           <Card.Title className="card-title">You owe</Card.Title>
-          <Card style={{ width: "auto", height: "auto" }}>
-            <Card.Body>
-              <Card.Text className="owe-card-text">
-                <strong> Monali </strong> <br />
-                Lunch <br />
-                Rs. 400
-                <div className="pay-button-div">
-                  <button className="pay-button" onClick={handleShow}>
-                    Pay
-                  </button>
-                </div>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <br />
-          <Card style={{ width: "auto", height: "auto" }}>
-            <Card.Body>
-              <Card.Text className="owe-card-text">
-                <strong> Aarushi </strong> <br />
-                Dinner <br />
-                Rs. 500
-                <div className="pay-button-div">
-                  <button className="pay-button">Pay</button>
-                </div>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <br />
-          <Card style={{ width: "auto", height: "auto" }}>
-            <Card.Body>
-              <Card.Text className="owe-card-text">
-                <strong> Monali </strong> <br />
-                Groceries <br />
-                Rs. 200
-                <div className="pay-button-div">
-                  <button className="pay-button">Pay</button>
-                </div>
-              </Card.Text>
-            </Card.Body>
-          </Card>
+          {youOwe.length > 0 ? (
+            <>{youOwe.map(renderCard)}</>
+          ) : (
+            "No records to show"
+          )}
         </Card.Body>
       </Card>
 

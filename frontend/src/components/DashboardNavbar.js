@@ -6,8 +6,12 @@ import { NavLink } from "react-router-dom";
 function DashboardNavbar(props) {
   const logOutHandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("balance");
     props.toggleLogInState();
   };
+
+  let balance = localStorage.getItem("name");
 
   return (
     <>
@@ -23,7 +27,7 @@ function DashboardNavbar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             {/* <Container> */}
             <Navbar.Brand className="userName" style={{ color: "#F5F5F5" }}>
-              Sample
+              {balance}
             </Navbar.Brand>
 
             <NavLink to="/" className="logoutBtn" onClick={logOutHandler}>
