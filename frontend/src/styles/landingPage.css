@@ -2,3 +2,10 @@ body {
   background: url(../assets/landingBg.jpg);
   min-height: 100%;
 }
+
+.container-md {
+  min-height: calc(100vh - 50px);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}

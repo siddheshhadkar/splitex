@@ -8,8 +8,8 @@ function LandingPage() {
   return (
     <>
       <LandingNavbar />
-      <Container fluid="md" className="mt-5">
-        <Row>
+      <Container fluid="md">
+        <Row className="gx-4">
           <Col xs={12} sm={6} className="my-auto">
             <div>
               <h1>

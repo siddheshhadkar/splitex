@@ -8,7 +8,7 @@
   height: 100%;
   margin: 90px auto 30px auto;
   border: 20px;
-  background-color: #3b0a79;
+  background: white;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 2px 2px 15px rgba(165, 128, 182, 0.3);
@@ -17,17 +17,23 @@
 }
 
 h3 {
-  color: white;
   font-weight: 500;
   margin-bottom: 8%;
   text-align: center;
+  color: #3b0a79;
+}
+
+label {
+  color: #3b0a79;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .btnLogin {
   margin: auto;
   display: block;
-  background: whitesmoke;
-  color: #3b0a79;
+  background: #3b0a79;
+  color: white;
   font-weight: bold;
   margin-top: 10%;
 }

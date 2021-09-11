@@ -57,7 +57,7 @@ function Login(props) {
             <h3> Login </h3>
           </div>
           <Form.Group className="mb-3">
-            <Form.Label style={{ color: "white" }}>Email address</Form.Label>
+            <Form.Label>Email address</Form.Label>
             <Form.Control
               id="email"
               type="email"
@@ -68,7 +68,7 @@ function Login(props) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label style={{ color: "white" }}>Password</Form.Label>
+            <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
               id="password"
