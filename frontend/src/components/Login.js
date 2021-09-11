@@ -37,6 +37,7 @@ function Login(props) {
 
     try {
       let response = await LogInService(data);
+      console.log(response);
       if (response.success && response.data) {
         localStorage.setItem("token", response.data);
         props.toggleLogInState();

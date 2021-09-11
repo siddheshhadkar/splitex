@@ -17,10 +17,9 @@ function App() {
 
   if (localStorage.getItem("token") !== null && !isLoggedIn) {
     (async () => {
-      const resultUser = await GetUserService(localStorage.getItem("token"));
+      const resultUser = await GetUserService();
       if (resultUser.success && resultUser.data) {
         setIsLoggedIn(true);
-        console.log(resultUser.data);
       } else {
         alert(resultUser.errorMessage);
       }

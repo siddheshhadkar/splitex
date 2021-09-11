@@ -1,6 +1,8 @@
 import axios from "./axiosConfig";
 
-export default async function GetUserService(token) {
+export default async function GetUserService(
+  token = localStorage.getItem("token")
+) {
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",

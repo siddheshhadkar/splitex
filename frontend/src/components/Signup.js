@@ -1,9 +1,63 @@
-import React from "react";
-import LandingNavbar from "./LandingNavbar";
+import React, { useState } from "react";
+import validator from "validator";
+
 import "../styles/login.css";
+
+import SignUpService from "../services/SignUpService";
+import LandingNavbar from "./LandingNavbar";
 import { Form, Button } from "react-bootstrap";
 
-function Signup() {
+function Signup(props) {
+  const [nameValue, setNameValue] = useState("");
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+
+  const handleNameChange = (e) => {
+    setNameValue(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmailValue(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPasswordValue(e.target.value);
+  };
+
+  const validateFields = (e) => {
+    e.preventDefault();
+    if (!validator.isEmail(emailValue)) {
+      alert("Please enter valid email");
+    } else if (passwordValue.length < 8) {
+      alert("Password should contain more than 8 characters");
+    } else if (validator.trim(nameValue).length <= 3) {
+      alert("Name should contain more than 3 characters");
+    } else {
+      signupUser();
+    }
+  };
+
+  const signupUser = async () => {
+    const data = {
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    };
+
+    try {
+      let response = await SignUpService(data);
+      console.log(response);
+      if (response.success) {
+        localStorage.setItem("token", response.data);
+        props.toggleLogInState();
+      } else {
+        alert(response.errorMessage);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <LandingNavbar />
@@ -19,6 +73,7 @@ function Signup() {
             id="name"
             placeholder="Enter your name"
             required
+            onChange={handleNameChange}
           />
         </Form.Group>
 
@@ -29,6 +84,7 @@ function Signup() {
             type="email"
             placeholder="Enter email address"
             required
+            onChange={handleEmailChange}
           />
         </Form.Group>
 
@@ -39,10 +95,11 @@ function Signup() {
             type="password"
             placeholder="Password"
             required
+            onChange={handlePasswordChange}
           />
         </Form.Group>
 
-        <Button className="btnLogin" type="submit">
+        <Button className="btnLogin" type="button" onClick={validateFields}>
           Sign Up
         </Button>
       </Form>
