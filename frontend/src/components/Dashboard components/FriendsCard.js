@@ -6,10 +6,7 @@ import "../../styles/friends-card.css";
 export default function FriendsCard() {
   return (
     <>
-      <Card
-        className="friends-card"
-        style={{ width: "auto", height: "auto" }}
-      >
+      <Card className="friends-card" style={{ width: "auto", height: "auto" }}>
         <Card.Body>
           <Card.Title className="right-section-card-title">Friends</Card.Title>
           <hr className="title-separator" />

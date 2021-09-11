@@ -25,18 +25,17 @@ export default function YouOweCard() {
       <Card
         style={{ width: "auto", height: "auto", marginBottom: "3%" }}
         className="card-style"
+        key={index}
       >
-        <Card.Body>
-          <Card.Text className="owe-card-text">
-            <strong> {card.name} </strong> <br />
-            {card.description} <br />
-            Rs. {card.amount}
-            <div className="pay-button-div">
-              <button className="pay-button" onClick={handleShow}>
-                Pay
-              </button>
-            </div>
-          </Card.Text>
+        <Card.Body className="owe-card-text">
+          <strong> {card.name} </strong> <br />
+          {card.description} <br />
+          Rs. {card.amount}
+          <div className="pay-button-div">
+            <button className="pay-button" onClick={handleShow}>
+              Pay
+            </button>
+          </div>
         </Card.Body>
       </Card>
     );
