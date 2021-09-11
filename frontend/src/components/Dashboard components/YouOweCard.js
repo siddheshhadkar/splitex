@@ -25,6 +25,7 @@ export default function YouOweCard() {
       <Card
         style={{ width: "auto", height: "auto", marginBottom: "3%" }}
         className="card-style"
+        key={index}
       >
         <Card.Body>
           <Card.Text className="owe-card-text">
