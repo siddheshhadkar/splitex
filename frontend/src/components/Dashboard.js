@@ -4,6 +4,8 @@ import GetUserService from "../services/GetUserService";
 
 import "../styles/dashboard.css";
 import "../styles/you-owe-card.css";
+
+import "../services/AddExpenseService";
 import DashboardNavbar from "./DashboardNavbar";
 import YouOweCard from "./Dashboard components/YouOweCard";
 import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
@@ -11,8 +13,10 @@ import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCar
 import FriendsCard from "./Dashboard components/FriendsCard";
 import BalanceCard from "./Dashboard components/BalanceCard";
 import GetTransactionsService from "../services/GetTransactionsService";
+import AddExpenseService from "../services/AddExpenseService";
 
 export default function Dashboard(props) {
+  const users = ["priyansh", "aarushi", "siddhesh", "monali"];
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,6 +26,12 @@ export default function Dashboard(props) {
   const [ownerTransactions, setOwnerTransactions] = useState([]);
   const [owedTransactions, setOwedTransactions] = useState([]);
   const [historyTransactions, setHistoryTransactions] = useState([]);
+
+  const [friend, setFriend] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+  const [ownerAmount, setOwnerAmount] = useState("");
+  const [friendAmount, setFriendAmount] = useState("");
 
   useEffect(() => {
     const getUser = async () => {
@@ -102,6 +112,30 @@ export default function Dashboard(props) {
     getTransactions();
   }, [userId]);
 
+  const addExpense = async () => {
+    const data = {
+      description: description,
+      totalAmount: amount,
+      owner: {
+        amount: ownerAmount,
+      },
+      friends: [
+        {
+          userId: friend,
+          amount: friendAmount,
+        },
+      ],
+    };
+
+    try {
+      let response = await AddExpenseService(data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(data);
+  };
+
   return (
     <>
       <DashboardNavbar
@@ -162,19 +196,31 @@ export default function Dashboard(props) {
         <Modal.Body>
           <div className="form-element">
             <label for="friend_name" className="label-style-add-expense">
-              With you and:{" "}
+              With you and: <select></select>
             </label>
-            <input type="text" name="friend_name" />
+            <input
+              type="text"
+              name="friend_name"
+              onChange={(e) => setFriend(e.target.value)}
+            />
 
             <label for="description" className="label-style-add-expense">
               Description:{" "}
             </label>
-            <input type="text" name="description" />
+            <input
+              type="text"
+              name="description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
             <label for="amount" className="label-style-add-expense" style={{}}>
               Amount
             </label>
-            <input type="text" name="amount" />
+            <input
+              type="text"
+              name="amount"
+              onChange={(e) => setAmount(e.target.value)}
+            />
 
             <label for="paid_by" className="label-style-add-expense" style={{}}>
               Paid by
@@ -199,12 +245,20 @@ export default function Dashboard(props) {
             <label for="owner_amount" className="label-style-add-expense">
               You{" "}
             </label>
-            <input type="text" name="owner_amount" />
+            <input
+              type="text"
+              name="owner_amount"
+              onChange={(e) => setOwnerAmount(e.target.value)}
+            />
 
             <label for="friend1_amount" className="label-style-add-expense">
               Monali
             </label>
-            <input type="text" name="friend1_amount" />
+            <input
+              type="text"
+              name="friend1_amount"
+              onChange={(e) => setFriendAmount(e.target.value)}
+            />
 
             <label
               className="label-style-add-expense"
@@ -220,7 +274,7 @@ export default function Dashboard(props) {
 
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>
-          <Button onClick={handleClose}>Pay</Button>
+          <Button onClick={addExpense}>Pay</Button>
         </Modal.Footer>
       </Modal>
     </>
