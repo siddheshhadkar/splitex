@@ -57,7 +57,6 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     if (userId !== "" && users.length !== 0) {
-      console.log("userID", userId, users);
       const youAreOwedData = (transactions) => {
         const data = [];
         transactions.forEach((transaction) => {
@@ -109,7 +108,6 @@ export default function Dashboard(props) {
         const data = [];
         transactions.forEach((transaction) => {
           if (transaction.owner.ownerId === userId) {
-            console.log("owner", transaction);
             transaction.friends.forEach((friend) => {
               if (friend.paymentStatus) {
                 let nameFriend;
@@ -129,7 +127,6 @@ export default function Dashboard(props) {
               }
             });
           } else {
-            console.log("not owner", transaction);
             transaction.friends.forEach((friend) => {
               if (friend.userId === userId && friend.paymentStatus) {
                 let nameOwner;
