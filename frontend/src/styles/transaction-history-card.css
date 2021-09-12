@@ -4,8 +4,8 @@
 }
 
 .transaction-card-date {
-  float: right;
   position: relative;
   bottom: 29px;
   color: gray;
+  margin: auto;
 }

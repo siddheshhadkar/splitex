@@ -55,52 +55,64 @@ export default function TransactionHistoryCard() {
   const renderCard = (card, index) => {
     let oId = card.owner.ownerId;
 
-    if (currentUserId === oId) {
-      card.friends.map((transaction, i) => {
-        if (transaction.paymentStatus == true) {
-          console.log("Reached here ", i);
-          return (
-            <Card
-              style={{ width: "auto", height: "auto" }}
-              className="card-style"
-              key={index}
-            >
-              <Card.Body>
-                <Card.Title className="transaction-card-body">
-                  {transaction.userId} payed you Rs. {transaction.amount}
-                </Card.Title>
+    return (
+      <>
+        {currentUserId === oId ? (
+          <>
+            {card.friends.map((transaction, i) => (
+              <>
+                {transaction.paymentStatus === true ? (
+                  <Card
+                    style={{
+                      width: "auto",
+                      height: "auto",
+                      marginBottom: "3%",
+                    }}
+                    className="card-style"
+                    key={index}
+                  >
+                    <Card.Body>
+                      <Card.Title className="transaction-card-body">
+                        {transaction.userId} payed you Rs. {transaction.amount}
+                      </Card.Title>
 
-                <div className="transaction-card-date">{transaction.date}</div>
+                      <div className="transaction-card-date">
+                        {card.date.substring(0, 10)}
+                      </div>
+                    </Card.Body>
+                  </Card>
+                ) : null}
+              </>
+            ))}
+          </>
+        ) : null}
 
-                <br />
-              </Card.Body>
-            </Card>
-          );
-        }
-      });
-    }
-
-    card.friends.map((transaction, i) => {
-      if (
-        currentUserId === transaction.userId &&
-        transaction.paymentStatus == true
-      ) {
-        console.log("Reached here in settled friends transac ", i);
-        return (
-          <Card style={{ width: "auto", height: "auto" }} key={index}>
-            <Card.Body>
-              <Card.Title className="transaction-card-body">
-                You payed {card.owner.ownerId} Rs. {transaction.amount}
-              </Card.Title>
-              <Card.Text>
-                <div className="transaction-card-date">{transaction.date}</div>
-              </Card.Text>
-              <br />
-            </Card.Body>
-          </Card>
-        );
-      }
-    });
+        {card.friends.map((transaction, i) => (
+          <>
+            {currentUserId === transaction.userId &&
+            transaction.paymentStatus === true ? (
+              <Card
+                style={{ width: "auto", height: "auto", marginBottom: "3%" }}
+                className="card-style"
+                key={index}
+              >
+                <Card.Body>
+                  <Card.Title className="transaction-card-body">
+                    You payed {card.owner.ownerId} Rs. {transaction.amount}
+                  </Card.Title>
+                  <Card.Text>
+                    <div className="transaction-card-date">
+                      {card.date.substring(0, 10)}
+                    </div>
+                  </Card.Text>
+                  <br />
+                </Card.Body>
+              </Card>
+            ) : null}
+          </>
+        ))}
+      </>
+    );
   };
   return (
     <div>
