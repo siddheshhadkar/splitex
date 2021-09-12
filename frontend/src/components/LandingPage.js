@@ -2,7 +2,8 @@ import React from "react";
 import LandingNavbar from "./LandingNavbar";
 import "../styles/landingPage.css";
 import heroImage from "../assets/heroImage.svg";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
@@ -22,6 +23,9 @@ function LandingPage() {
                   bill splitting needs!
                 </p>
               </div>
+              <Link to="/signup">
+                <Button>Create a free account!!</Button>
+              </Link>
             </div>
           </Col>
           <Col xs={12} sm={6} className="my-auto">
