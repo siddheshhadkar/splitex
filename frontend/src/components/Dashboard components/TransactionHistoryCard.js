@@ -33,7 +33,11 @@ export default function TransactionHistoryCard(props) {
           </Card.Title>
 
           <div className="transaction-card-date">
-            {card.settledDate.substring(0, 10)}
+            {card.settledDate !== undefined ? (
+              card.settledDate.substring(0, 10)
+            ) : (
+              <></>
+            )}
           </div>
         </Card.Body>
       </Card>
