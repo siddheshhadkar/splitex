@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import AddBalanceService from "./../../services/AddBalanceService";
-import GetUserService from "./../../services/GetUserService";
 
 import "../../styles/balance-card.css";
 import "../../styles/you-owe-card.css";
-export default function BalanceCard() {
+export default function BalanceCard(props) {
   const [show, setShow] = useState(false);
-  const [amountValue, setAmountValue] = useState(0);
-
-  useEffect(() => {
-    return async () => {
-      const userData = await GetUserService(localStorage.getItem("token"));
-      setAmountValue(userData.data.balance);
-    };
-  });
+  const [amount, setAmount] = useState(props.balance);
+  const [amountInput, setAmountInput] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleAmountInput = (e) => {
+    setAmountInput(e.target.value);
+  };
+
+  useEffect(() => {
+    setAmount(props.balance);
+  }, [props.balance]);
 
   const addBalance = async () => {
     const data = {
-      amount: document.getElementById("amount").value,
+      amount: amountInput,
     };
-    console.log(data);
     try {
       let response = await AddBalanceService(data);
-      console.log("response hello", response);
       if (response.success === true) {
         alert("Added Successfully!");
+        setAmount(response.data);
         setShow(false);
       } else {
         alert(response.errorMessage);
@@ -47,7 +46,7 @@ export default function BalanceCard() {
           </Card.Title>
           <hr className="title-separator" />
 
-          <Card.Text className="balance-div">Rs.{amountValue} </Card.Text>
+          <Card.Text className="balance-div">Rs. {amount} </Card.Text>
           <Button className="add-balance-btn" onClick={handleShow}>
             {" "}
             Add Balance
@@ -61,17 +60,22 @@ export default function BalanceCard() {
         </Modal.Header>
         <Modal.Body>
           <label className="label-style">Amount: </label>
-          <input type="text" name="amount" id="amount" />
+          <input
+            type="text"
+            name="amount"
+            id="amount"
+            onChange={handleAmountInput}
+          />
           <br />
           <label className="label-style">Choose payment option: </label>
           <br></br>
-          <input type="radio" name="payMode" checked />
-          <label for="payMode1" style={{ margin: "5px" }}>
+          <input type="radio" name="payMode" checked readOnly />
+          <label htmlFor="payMode1" style={{ margin: "5px" }}>
             UPI/Wallet
           </label>
           <br></br>
           <input type="radio" name="payMode" />
-          <label for="payMode2" style={{ margin: "5px" }}>
+          <label htmlFor="payMode2" style={{ margin: "5px" }}>
             Credit Card/ Debit Card
           </label>
           <br></br>

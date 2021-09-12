@@ -37,8 +37,8 @@ const getUser = async (req, res) => {
 
 const putBalance = async (req, res) => {
   try {
-    await addBalance(req.user.email, req.body.amount);
-    return res.status(200).json({ success: true });
+    const balance = await addBalance(req.user.email, req.body.amount);
+    return res.status(200).json({ data: balance.data, success: true });
   } catch (e) {
     return res
       .status(e.statusCode)

@@ -38,12 +38,14 @@ const dbGetUser = async (email) => {
 };
 
 const dbAddBalance = async (email, amount) => {
-  await User.updateOne({ email: email }, { $inc: { balance: amount } }).catch(
-    () => {
-      throw { errorMessage: "Error adding amount to wallet", statusCode: 500 };
-    }
-  );
-  return { statusCode: 200 };
+  const user = await User.findOneAndUpdate(
+    { email: email },
+    { $inc: { balance: amount } },
+    { new: true }
+  ).catch(() => {
+    throw { errorMessage: "Error adding amount to wallet", statusCode: 500 };
+  });
+  return { data: user.balance, statusCode: 200 };
 };
 
 const dbFetchAllUsers = async () => {

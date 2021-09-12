@@ -46,7 +46,6 @@ function Signup(props) {
 
     try {
       let response = await SignUpService(data);
-      console.log(response);
       if (response.success) {
         localStorage.setItem("token", response.data);
         props.toggleLogInState();

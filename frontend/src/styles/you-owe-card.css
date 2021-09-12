@@ -1,8 +1,5 @@
 .owe-card-text {
-  position: relative;
-  margin-top:7%;
   color: #3b0a79;
-  bottom: 7px;
 }
 
 .pay-button-div {
@@ -24,4 +21,3 @@
   font-weight: bold;
   margin: 10px;
 }
-
