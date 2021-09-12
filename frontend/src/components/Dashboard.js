@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import GetUserService from "../services/GetUserService";
+import GetUsersService from "../services/GetUsersService";
+import GetTransactionsService from "../services/GetTransactionsService";
+import AddExpenseService from "../services/AddExpenseService";
 
 import "../styles/dashboard.css";
 import "../styles/you-owe-card.css";
@@ -12,14 +15,12 @@ import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
 import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCard";
 import FriendsCard from "./Dashboard components/FriendsCard";
 import BalanceCard from "./Dashboard components/BalanceCard";
-import GetTransactionsService from "../services/GetTransactionsService";
-import AddExpenseService from "../services/AddExpenseService";
 
 export default function Dashboard(props) {
-  const users = ["priyansh", "aarushi", "siddhesh", "monali"];
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [balance, setBalance] = useState(null);
@@ -42,7 +43,16 @@ export default function Dashboard(props) {
         setBalance(userData.data.balance);
       }
     };
+
+    const getUsers = async () => {
+      const usersData = await GetUsersService();
+      if (usersData.success && usersData.data) {
+        setUsers(usersData.data);
+      }
+    };
+
     getUser();
+    getUsers();
   }, []);
 
   useEffect(() => {
@@ -52,8 +62,13 @@ export default function Dashboard(props) {
         if (transaction.owner.ownerId === userId) {
           transaction.friends.forEach((friend) => {
             if (!friend.paymentStatus) {
+              let nameFriend;
+              users.forEach((user) => {
+                if (user._id === friend.userId) nameFriend = user.name;
+              });
               const obj = {
                 userId: friend.userId,
+                name: nameFriend,
                 amount: friend.amount,
               };
               data.push(obj);
@@ -69,9 +84,14 @@ export default function Dashboard(props) {
       transactions.forEach((transaction) => {
         transaction.friends.forEach((friend) => {
           if (friend.userId === userId && !friend.paymentStatus) {
+            let nameOwner;
+            users.forEach((user) => {
+              if (user._id === transaction.owner.ownerId) nameOwner = user.name;
+            });
             const obj = {
               transactionId: transaction._id,
               ownerId: transaction.owner.ownerId,
+              name: nameOwner,
               description: transaction.description,
               amount: friend.amount,
             };
@@ -87,16 +107,26 @@ export default function Dashboard(props) {
       transactions.forEach((transaction) => {
         transaction.friends.forEach((friend) => {
           if (friend.paymentStatus) {
+            let nameOwner;
+            let nameFriend;
+            users.forEach((user) => {
+              if (user._id === transaction.owner.ownerId) nameOwner = user.name;
+              if (user._id === friend.userId) nameFriend = user.name;
+            });
             const obj = {
               ownerId: transaction.owner.ownerId,
-              userId: friend.userId,
+              userId: userId,
+              nameOwner: nameOwner,
+              nameFriend: nameFriend,
+              friendId: friend.userId,
               amount: friend.amount,
-              settledData: friend.settledDate,
+              settledDate: friend.settledDate,
             };
             data.push(obj);
           }
         });
       });
+      console.log(data);
       setHistoryTransactions(data);
     };
 
@@ -110,7 +140,7 @@ export default function Dashboard(props) {
       }
     };
     getTransactions();
-  }, [userId]);
+  }, [userId, users]);
 
   const addExpense = async () => {
     const data = {

@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import "../../styles/you-are-owed-card.css";
-export default function YouAreOwedCard() {
-  const areOwed = [
-    {
-      name: "Siddhesh",
-      amount: "400",
-    },
+export default function YouAreOwedCard(props) {
+  const [transactions, setTransactions] = useState(props.transactions);
 
-    {
-      name: "Aarushi",
-      amount: "200",
-    },
-  ];
+  useEffect(() => {
+    setTransactions(props.transactions);
+  }, [props.transactions]);
 
   const renderCard = (card, index) => {
     return (
@@ -40,8 +34,8 @@ export default function YouAreOwedCard() {
       >
         <Card.Body>
           <Card.Title className="card-title">You are owed</Card.Title>
-          {areOwed.length > 0 ? (
-            <>{areOwed.map(renderCard)}</>
+          {transactions.length > 0 ? (
+            <>{transactions.map(renderCard)}</>
           ) : (
             "No records to show"
           )}

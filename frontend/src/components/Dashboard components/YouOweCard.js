@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
 import "../../styles/you-owe-card.css";
-export default function YouOweCard() {
+
+export default function YouOweCard(props) {
   const [show, setShow] = useState(false);
+  const [transactions, setTransactions] = useState(props.transactions);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const youOwe = [
-    {
-      name: "Monali",
-      description: "Lunch",
-      amount: "300",
-    },
-    {
-      name: "Priyansh",
-      description: "Dinner",
-      amount: "500",
-    },
-  ];
+  useEffect(() => {
+    setTransactions(props.transactions);
+  }, [props.transactions]);
 
   const renderCard = (card, index) => {
     return (
@@ -52,8 +45,8 @@ export default function YouOweCard() {
       >
         <Card.Body>
           <Card.Title className="card-title">You owe</Card.Title>
-          {youOwe.length > 0 ? (
-            <>{youOwe.map(renderCard)}</>
+          {transactions.length > 0 ? (
+            <>{transactions.map(renderCard)}</>
           ) : (
             "No records to show"
           )}
