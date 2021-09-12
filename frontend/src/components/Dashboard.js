@@ -67,7 +67,7 @@ export default function Dashboard(props) {
                 if (user._id === friend.userId) nameFriend = user.name;
               });
               const obj = {
-                userId: friend.userId,
+                friendId: friend.userId,
                 name: nameFriend,
                 amount: friend.amount,
               };
@@ -105,28 +105,47 @@ export default function Dashboard(props) {
     const historyData = (transactions) => {
       const data = [];
       transactions.forEach((transaction) => {
-        transaction.friends.forEach((friend) => {
-          if (friend.paymentStatus) {
-            let nameOwner;
-            let nameFriend;
-            users.forEach((user) => {
-              if (user._id === transaction.owner.ownerId) nameOwner = user.name;
-              if (user._id === friend.userId) nameFriend = user.name;
-            });
-            const obj = {
-              ownerId: transaction.owner.ownerId,
-              userId: userId,
-              nameOwner: nameOwner,
-              nameFriend: nameFriend,
-              friendId: friend.userId,
-              amount: friend.amount,
-              settledDate: friend.settledDate,
-            };
-            data.push(obj);
-          }
-        });
+        if (transaction.owner.ownerId === userId) {
+          transaction.friends.forEach((friend) => {
+            if (friend.paymentStatus) {
+              let nameFriend;
+              users.forEach((user) => {
+                if (user._id === friend.userId) nameFriend = user.name;
+              });
+              const obj = {
+                userId: userId,
+                ownerId: transaction.owner.ownerId,
+                friendId: friend.userId,
+                nameOwner: null,
+                nameFriend: nameFriend,
+                amount: friend.amount,
+                settledDate: friend.settledDate,
+              };
+              data.push(obj);
+            }
+          });
+        } else {
+          transaction.friends.forEach((friend) => {
+            if (friend.paymentStatus) {
+              let nameOwner;
+              users.forEach((user) => {
+                if (user._id === transaction.owner.ownerId)
+                  nameOwner = user.name;
+              });
+              const obj = {
+                userId: userId,
+                ownerId: transaction.owner.ownerId,
+                friendId: friend.userId,
+                nameOwner: nameOwner,
+                nameFriend: null,
+                amount: friend.amount,
+                settledDate: friend.settledDate,
+              };
+              data.push(obj);
+            }
+          });
+        }
       });
-      console.log(data);
       setHistoryTransactions(data);
     };
 
