@@ -10,25 +10,97 @@ import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
 import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCard";
 import FriendsCard from "./Dashboard components/FriendsCard";
 import BalanceCard from "./Dashboard components/BalanceCard";
+import GetTransactionsService from "../services/GetTransactionsService";
 
 export default function Dashboard(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [balance, setBalance] = useState(null);
+  const [ownerTransactions, setOwnerTransactions] = useState([]);
+  const [owedTransactions, setOwedTransactions] = useState([]);
+  const [historyTransactions, setHistoryTransactions] = useState([]);
 
   useEffect(() => {
     const getUser = async () => {
       const userData = await GetUserService();
       if (userData.success && userData.data) {
+        setUserId(userData.data._id);
         setUserName(userData.data.name);
         setBalance(userData.data.balance);
       }
     };
-
     getUser();
   }, []);
+
+  useEffect(() => {
+    const youAreOwedData = (transactions) => {
+      const data = [];
+      transactions.forEach((transaction) => {
+        if (transaction.owner.ownerId === userId) {
+          transaction.friends.forEach((friend) => {
+            if (!friend.paymentStatus) {
+              const obj = {
+                userId: friend.userId,
+                amount: friend.amount,
+              };
+              data.push(obj);
+            }
+          });
+        }
+      });
+      setOwnerTransactions(data);
+    };
+
+    const youOweData = (transactions) => {
+      const data = [];
+      transactions.forEach((transaction) => {
+        transaction.friends.forEach((friend) => {
+          if (friend.userId === userId && !friend.paymentStatus) {
+            const obj = {
+              transactionId: transaction._id,
+              ownerId: transaction.owner.ownerId,
+              description: transaction.description,
+              amount: friend.amount,
+            };
+            data.push(obj);
+          }
+        });
+      });
+      setOwedTransactions(data);
+    };
+
+    const historyData = (transactions) => {
+      const data = [];
+      transactions.forEach((transaction) => {
+        transaction.friends.forEach((friend) => {
+          if (friend.paymentStatus) {
+            const obj = {
+              ownerId: transaction.owner.ownerId,
+              userId: friend.userId,
+              amount: friend.amount,
+              settledData: friend.settledDate,
+            };
+            data.push(obj);
+          }
+        });
+      });
+      setHistoryTransactions(data);
+    };
+
+    const getTransactions = async () => {
+      const transactionData = await GetTransactionsService();
+      if (transactionData.success && transactionData.data) {
+        const allTransactions = transactionData.data;
+        youAreOwedData(allTransactions);
+        youOweData(allTransactions);
+        historyData(allTransactions);
+      }
+    };
+    getTransactions();
+  }, [userId]);
 
   return (
     <>
@@ -53,10 +125,10 @@ export default function Dashboard(props) {
         </Row>
         <Row>
           <Col xs={12} md={4}>
-            <YouOweCard />
+            <YouOweCard transactions={owedTransactions} />
           </Col>
           <Col xs={12} md={4}>
-            <YouAreOwedCard />
+            <YouAreOwedCard transactions={ownerTransactions} />
           </Col>
           <Col xs={12} md={4}>
             <BalanceCard balance={balance} />
@@ -72,7 +144,7 @@ export default function Dashboard(props) {
         </Row>
         <Row>
           <Col xs={12} md={8}>
-            <TransactionHistoryCard />
+            <TransactionHistoryCard transactions={historyTransactions} />
           </Col>
 
           <Col xs={12} md={4}>
