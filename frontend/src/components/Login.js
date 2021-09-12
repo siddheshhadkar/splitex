@@ -37,13 +37,8 @@ function Login(props) {
 
     try {
       let response = await LogInService(data);
-      console.log(response);
-      let name = response.user.name;
-      let balance = response.user.balance;
       if (response.success && response.data) {
         localStorage.setItem("token", response.data);
-        localStorage.setItem("name", name);
-        localStorage.setItem("balance", balance);
         props.toggleLogInState();
       } else {
         alert(response.errorMessage);
