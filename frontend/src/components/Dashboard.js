@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
-import DashboardNavbar from "./DashboardNavbar";
+import GetUserService from "../services/GetUserService";
+
 import "../styles/dashboard.css";
 import "../styles/you-owe-card.css";
+import DashboardNavbar from "./DashboardNavbar";
 import YouOweCard from "./Dashboard components/YouOweCard";
 import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
 import TransactionHistoryCard from "./Dashboard components/TransactionHistoryCard";
@@ -13,10 +15,27 @@ export default function Dashboard(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [userName, setUserName] = useState("");
+  const [balance, setBalance] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await GetUserService();
+      if (userData.success && userData.data) {
+        setUserName(userData.data.name);
+        setBalance(userData.data.balance);
+      }
+    };
+
+    getUser();
+  }, []);
 
   return (
     <>
-      <DashboardNavbar toggleLogInState={props.toggleLogInState} />
+      <DashboardNavbar
+        toggleLogInState={props.toggleLogInState}
+        userName={userName}
+      />
       <Container className="bg">
         <Row>
           <Col xs={12} md={8}>
@@ -40,7 +59,7 @@ export default function Dashboard(props) {
             <YouAreOwedCard />
           </Col>
           <Col xs={12} md={4}>
-            <BalanceCard />
+            <BalanceCard balance={balance} />
           </Col>
         </Row>
 

@@ -10,12 +10,12 @@ export default function FriendsCard() {
         <Card.Body>
           <Card.Title className="right-section-card-title">Friends</Card.Title>
           <hr className="title-separator" />
-          <Card.Text className="friends-text">
+          <div className="friends-text">
             Aarushi <br /> <hr />
             Monali <br /> <hr />
             Priyansh <br /> <hr />
             Siddhesh <br />
-          </Card.Text>
+          </div>
         </Card.Body>
       </Card>
     </>
