@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+import swal from "sweetalert";
 import GetUserService from "../services/GetUserService";
+import GetAllUsersService from "../services/GetAllUsersService";
 
 import "../styles/dashboard.css";
 import "../styles/you-owe-card.css";
 
-import "../services/AddExpenseService"
+import "../services/AddExpenseService";
 import DashboardNavbar from "./DashboardNavbar";
 import YouOweCard from "./Dashboard components/YouOweCard";
 import YouAreOwedCard from "./Dashboard components/YouAreOwedCard";
@@ -14,16 +16,16 @@ import FriendsCard from "./Dashboard components/FriendsCard";
 import BalanceCard from "./Dashboard components/BalanceCard";
 import AddExpenseService from "../services/AddExpenseService";
 
+var response = {};
+
 export default function Dashboard(props) {
-
-
-
-  const users = ["priyansh", "aarushi", "siddhesh", "monali"];
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [userName, setUserName] = useState("");
   const [balance, setBalance] = useState(null);
+  const [friendsNameArray, setFriendsNameArray] = useState([]);
+  const [friendsOption, setFriendsOption] = useState([]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -33,28 +35,60 @@ export default function Dashboard(props) {
         setBalance(userData.data.balance);
       }
     };
+    const getFriends = async () => {
+      response = await GetAllUsersService();
 
+      let friendsName = ["Select Friend"];
+      for (let i = 0; i < response.length; i++) {
+        friendsName.push(response[i]["name"]);
+      }
+      setFriendsNameArray((friendsNameArray) => [...friendsName, friendsName]);
+      let friendsList = Object.keys(friendsName).map((k) => {
+        return (
+          <option key={k} value={friendsName[k]}>
+            {friendsName[k]}
+          </option>
+        );
+      }, this);
+
+      setFriendsOption((friendsOption) => [...friendsOption, friendsList]);
+    };
     getUser();
+    getFriends();
   }, []);
 
-  const [friend, setFriend] = useState("");
+  const [friend1, setFriend1] = useState("");
+  const [friend2, setFriend2] = useState("");
+  const [friend3, setFriend3] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [ownerAmount, setOwnerAmount] = useState("");
-  const [friendAmount, setFriendAmount] = useState("");
+  const [friend1Amount, setFriend1Amount] = useState("");
+  const [friend2Amount, setFriend2Amount] = useState("");
+  const [friend3Amount, setFriend3Amount] = useState("");
 
   const addExpense = async () => {
     const data = {
-      "description": description,
-      "totalAmount": amount,
-      "owner": {
-        "amount": ownerAmount
+      description: description,
+      totalAmount: amount,
+      owner: {
+        amount: ownerAmount,
       },
-      "friends": [{
-        "userId": friend,
-        "amount": friendAmount
-      }]
-    }
+      friends: [
+        {
+          userId: response.filter((friend) => friend.name == friend1)[0]["_id"],
+          amount: friend1Amount,
+        },
+        {
+          userId: response.filter((friend) => friend.name == friend2)[0]["_id"],
+          amount: friend2Amount,
+        },
+        {
+          userId: response.filter((friend) => friend.name == friend3)[0]["_id"],
+          amount: friend3Amount,
+        },
+      ],
+    };
 
     try {
       let response = await AddExpenseService(data);
@@ -62,12 +96,11 @@ export default function Dashboard(props) {
     } catch (error) {
       console.log(error);
     }
-    console.log(data);
 
+    swal("Expense Added", "", "success");
   };
 
   return (
-
     <>
       <DashboardNavbar
         toggleLogInState={props.toggleLogInState}
@@ -125,28 +158,24 @@ export default function Dashboard(props) {
         </Modal.Header>
 
         <Modal.Body>
-
-          <div className="form-element">
+          {/* <div className="form-element">
             <label for="friend_name" className="label-style-add-expense">
               With you and:{" "}
-              <select>
-
-
-              </select>
             </label>
-            <input type="text" name="friend_name" onChange={(e) => setFriend(e.target.value)} />
-
-
+            <select>
+              {friendsOption}
+              </select>
+         <br />
             <label for="description" className="label-style-add-expense">
               Description:{" "}
             </label>
             <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} />
-
-            <label for="amount" className="label-style-add-expense" style={{}}>
-              Amount
+            <br /> <br />
+            <label for="amount" className="label-sty le-add-expense" style={{}}>
+              Total Amount 
             </label>
             <input type="text" name="amount" onChange={(e) => setAmount(e.target.value)} />
-
+            
             <label for="paid_by" className="label-style-add-expense" style={{}}>
               Paid by
             </label>
@@ -157,7 +186,7 @@ export default function Dashboard(props) {
             </label>
 
             <input type="radio" name="split" className="split-input" />
-
+ 
             <span className="label-style-split" style={{}}>
               Equally
             </span>
@@ -186,6 +215,91 @@ export default function Dashboard(props) {
             </label>
 
             <input type="text" name="friend2_amount" />
+          </div> */}
+
+          <div className="form-element">
+            <label for="description" className="label-style-add-expense">
+              Description:{" "}
+            </label>
+            <input
+              type="text"
+              name="description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <br /> <br />
+            <label for="amount" className="label-sty le-add-expense" style={{}}>
+              Total Amount
+            </label>
+            <input
+              type="text"
+              name="amount"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <label for="owner_amount" className="label-style-add-expense">
+              You{" "}
+            </label>
+            <input
+              type="text"
+              name="owner_amount"
+              onChange={(e) => setOwnerAmount(e.target.value)}
+            />
+            <Row>
+              <Col xs={12} md={6}>
+                <label for="owner_amount" className="label-style-add-expense">
+                  Split with{" "}
+                </label>
+              </Col>
+              <Col xs={12} md={6}>
+                <label for="owner_amount" className="label-style-add-expense">
+                  Amount
+                </label>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs={12} md={6}>
+                <select onChange={(e) => setFriend1(e.target.value)}>
+                  {friendsOption}
+                </select>
+              </Col>
+              <Col xs={12} md={6}>
+                <input
+                  type="text"
+                  name="friend1Amount"
+                  onChange={(e) => setFriend1Amount(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs={12} md={6}>
+                <select onChange={(e) => setFriend2(e.target.value)}>
+                  {friendsOption}
+                </select>
+              </Col>
+              <Col xs={12} md={6}>
+                <input
+                  type="text"
+                  name="friend2Amount"
+                  onChange={(e) => setFriend2Amount(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs={12} md={6}>
+                <select onChange={(e) => setFriend3(e.target.value)}>
+                  {friendsOption}
+                </select>
+              </Col>
+              <Col xs={12} md={6}>
+                <input
+                  type="text"
+                  name="friend3Amount"
+                  onChange={(e) => setFriend3Amount(e.target.value)}
+                />
+              </Col>
+            </Row>
           </div>
         </Modal.Body>
 
@@ -195,10 +309,5 @@ export default function Dashboard(props) {
         </Modal.Footer>
       </Modal>
     </>
-
-
   );
-
-
 }
-

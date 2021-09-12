@@ -1,6 +1,6 @@
 import axios from "./axiosConfig";
 
-export default async function AddExpenseService(data) {
+export default async function GetAllUsersService() {
 
     const headers = {
         Accept: "application/json",
@@ -9,9 +9,10 @@ export default async function AddExpenseService(data) {
     };
 
     try {
-        const response = await axios.post("/transaction", data, { headers });
-        console.log("yolo");
-        console.log(response);
+        const response = await axios.get("/user/all", { headers });
+        console.log("getting all users");
+        // console.log(response);
+        return response.data.data;
     } catch (e) {
         return e.response.data;
     }
