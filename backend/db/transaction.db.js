@@ -84,9 +84,11 @@ const dbFetchAllTransactions = async (userId) => {
       { "owner.ownerId": userId },
       { friends: { $elemMatch: { userId: userId } } },
     ],
-  }).catch(() => {
-    throw { errorMessage: "Error fetching transactions", statusCode: 500 };
-  });
+  })
+    .sort("-date")
+    .catch(() => {
+      throw { errorMessage: "Error fetching transactions", statusCode: 500 };
+    });
   if (result.length === 0) {
     throw {
       errorMessage: "No transaction record exists for this user",

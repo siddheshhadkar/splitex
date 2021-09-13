@@ -67,7 +67,7 @@ const getToken = async (req, res) => {
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: 300 },
+      { expiresIn: 24 * 60 * 60 },
       (err, token) => {
         if (!err) {
           return res.status(200).json({ data: token, success: true });

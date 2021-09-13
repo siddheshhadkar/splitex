@@ -193,7 +193,6 @@ export default function Dashboard(props) {
     ) {
       alert("Please enter valid details");
     } else {
-      console.log(data);
       try {
         let response = await AddExpenseService(data);
         if (response.success) {
@@ -355,7 +354,7 @@ export default function Dashboard(props) {
             <input
               style={{ minWidth: "100%", maxWidth: "100%" }}
               type="text"
-              name="description"
+              id="description"
               onChange={(e) => setDescription(e.target.value)}
             />
             <label
@@ -367,17 +366,17 @@ export default function Dashboard(props) {
             </label>
             <input
               style={{ minWidth: "100%", maxWidth: "100%" }}
-              type="text"
-              name="amount"
+              type="number"
+              id="amount"
               onChange={(e) => setAmount(e.target.value)}
             />
             <label htmlFor="owner_amount" className="label-style-add-expense">
-              You{" "}
+              You pay{" "}
             </label>
             <input
               style={{ minWidth: "100%", maxWidth: "100%" }}
-              type="text"
-              name="owner_amount"
+              type="number"
+              id="owner_amount"
               onChange={(e) => setOwnerAmount(e.target.value)}
             />
             <Row>
@@ -402,7 +401,7 @@ export default function Dashboard(props) {
                     : friends.map((friend) => {
                         return (
                           <option key={friend._id} value={friend._id}>
-                            {friend.name}
+                            {friend.name}: ({friend.email})
                           </option>
                         );
                       })}
@@ -411,7 +410,7 @@ export default function Dashboard(props) {
               <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  type="text"
+                  type="number"
                   name="friend1Amount"
                   onChange={handleFriend1Amount}
                 />
@@ -431,7 +430,7 @@ export default function Dashboard(props) {
                     : friends.map((friend) => {
                         return (
                           <option key={friend._id} value={friend._id}>
-                            {friend.name}
+                            {friend.name}: ({friend.email})
                           </option>
                         );
                       })}
@@ -440,7 +439,7 @@ export default function Dashboard(props) {
               <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  type="text"
+                  type="number"
                   name="friend2Amount"
                   onChange={handleFriend2Amount}
                 />
@@ -460,7 +459,7 @@ export default function Dashboard(props) {
                     : friends.map((friend) => {
                         return (
                           <option key={friend._id} value={friend._id}>
-                            {friend.name}
+                            {friend.name}: ({friend.email})
                           </option>
                         );
                       })}
@@ -469,7 +468,7 @@ export default function Dashboard(props) {
               <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  type="text"
+                  type="number"
                   name="friend3Amount"
                   onChange={handleFriend3Amount}
                 />

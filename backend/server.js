@@ -4,7 +4,19 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+const whitelist = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("origin:", origin);
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("origin acceptable");
+      callback(null, true);
+    } else {
+      console.log("origin rejected");
+    }
+  },
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
