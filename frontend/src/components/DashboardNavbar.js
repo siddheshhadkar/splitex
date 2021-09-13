@@ -26,11 +26,7 @@ function DashboardNavbar(props) {
               {props.userName}
             </Navbar.Brand>
 
-            <NavLink
-              to="/"
-              className="logoutBtn btn-bg"
-              onClick={logOutHandler}
-            >
+            <NavLink to="/" className="logoutBtn" onClick={logOutHandler}>
               Logout
             </NavLink>
             {/* </Container> */}

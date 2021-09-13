@@ -15,11 +15,11 @@ export default function LandingNavbar() {
           </NavLink>
         </Container>
 
-        <NavLink to="/login" className="btn-login btn-bg">
+        <NavLink to="/login" className="btn-login">
           Login
         </NavLink>
 
-        <NavLink to="/signup" className="btn-signup btn-bg">
+        <NavLink to="/signup" className="btn-signup">
           SignUp
         </NavLink>
       </Navbar>
