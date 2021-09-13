@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import swal from "sweetalert";
 import GetUserService from "../services/GetUserService";
 import GetUsersService from "../services/GetUsersService";
@@ -22,24 +22,17 @@ export default function Dashboard(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [users, setUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [balance, setBalance] = useState(null);
-  const [friendsNameArray, setFriendsNameArray] = useState([]);
-  const [friendsOption, setFriendsOption] = useState([]);
   const [ownerTransactions, setOwnerTransactions] = useState([]);
   const [owedTransactions, setOwedTransactions] = useState([]);
   const [historyTransactions, setHistoryTransactions] = useState([]);
 
-  const [friend1, setFriend1] = useState("");
-  const [friend2, setFriend2] = useState("");
-  const [friend3, setFriend3] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [ownerAmount, setOwnerAmount] = useState("");
-  const [friend1Amount, setFriend1Amount] = useState("");
-  const [friend2Amount, setFriend2Amount] = useState("");
-  const [friend3Amount, setFriend3Amount] = useState("");
 
   useEffect(() => {
     const getUser = async () => {
@@ -55,21 +48,7 @@ export default function Dashboard(props) {
       const usersData = await GetUsersService();
       if (usersData.success && usersData.data) {
         setUsers(usersData.data);
-
-        let friendsName = ["Select Friend"];
-        for (let i = 0; i < usersData.data.length; i++) {
-          friendsName.push(usersData.data[i]["name"]);
-        }
-        setFriendsNameArray(friendsName);
-        let friendsList = Object.keys(friendsName).map((k) => {
-          return (
-            <option key={k} value={friendsName[k]}>
-              {friendsName[k]}
-            </option>
-          );
-        }, this);
-
-        setFriendsOption((friendsOption) => [...friendsOption, friendsList]);
+        setFriends(usersData.data);
       }
     };
 
@@ -193,34 +172,120 @@ export default function Dashboard(props) {
       owner: {
         amount: ownerAmount,
       },
-      friends: [
-        {
-          userId: users.filter((friend) => friend.name === friend1)[0]["_id"],
-          amount: friend1Amount,
-        },
-        {
-          userId: users.filter((friend) => friend.name === friend2)[0]["_id"],
-          amount: friend2Amount,
-        },
-        {
-          userId: users.filter((friend) => friend.name === friend3)[0]["_id"],
-          amount: friend3Amount,
-        },
-      ],
+      friends: [],
     };
 
-    try {
-      let response = await AddExpenseService(data);
-      if (response.success) {
-        swal("Expense Added", "", "success");
-      } else {
-        swal("Error", response.errorMessage, "error");
+    selectedFriends.forEach((id, index) => {
+      if (id !== null && selectedFriendsAmount[index] !== null) {
+        const obj = {
+          userId: id,
+          amount: selectedFriendsAmount[index],
+        };
+        data.friends.push(obj);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setShow(false);
-      window.location.reload();
+    });
+    if (
+      data.friends.length === 0 ||
+      data.description === "" ||
+      data.owner.amount === "" ||
+      data.totalAmount === ""
+    ) {
+      alert("Please enter valid details");
+    } else {
+      console.log(data);
+      try {
+        let response = await AddExpenseService(data);
+        if (response.success) {
+          swal("Expense Added", "", "success").then(() => {
+            setShow(false);
+            window.location.reload();
+          });
+        } else {
+          swal(
+            "Error",
+            response.errorMessage === undefined
+              ? "Please enter valid details"
+              : response.errorMessage,
+            "error"
+          );
+        }
+      } catch (error) {
+        console.log(error);
+        setShow(false);
+      }
+    }
+  };
+
+  const selectedFriends = [null, null, null];
+
+  const handleSelectFriend1 = (e) => {
+    if (e.target.value === "default") {
+      selectedFriends[0] = null;
+    } else {
+      if (
+        selectedFriends[1] === e.target.value ||
+        selectedFriends[2] === e.target.value
+      ) {
+        swal("Error", "You have already selected this user", "error");
+      } else {
+        selectedFriends[0] = e.target.value;
+      }
+    }
+  };
+
+  const handleSelectFriend2 = (e) => {
+    if (e.target.value === "default") {
+      selectedFriends[1] = null;
+    } else {
+      if (
+        selectedFriends[0] === e.target.value ||
+        selectedFriends[2] === e.target.value
+      ) {
+        swal("Error", "You have already selected this user", "error");
+      } else {
+        selectedFriends[1] = e.target.value;
+      }
+    }
+  };
+
+  const handleSelectFriend3 = (e) => {
+    if (e.target.value === "default") {
+      selectedFriends[2] = null;
+    } else {
+      if (
+        selectedFriends[1] === e.target.value ||
+        selectedFriends[0] === e.target.value
+      ) {
+        swal("Error", "You have already selected this user", "error");
+      } else {
+        selectedFriends[2] = e.target.value;
+      }
+    }
+  };
+
+  const selectedFriendsAmount = [null, null, null];
+
+  const handleFriend1Amount = (e) => {
+    if (e.target.value === "") {
+      selectedFriendsAmount[0] = null;
+    } else {
+      selectedFriendsAmount[0] = e.target.value;
+    }
+  };
+
+  const handleFriend2Amount = (e) => {
+    if (e.target.value === "") {
+      selectedFriendsAmount[1] = null;
+    } else {
+      selectedFriendsAmount[1] = e.target.value;
+    }
+  };
+
+  const handleFriend3Amount = (e) => {
+    if (e.target.value === "") {
+      selectedFriendsAmount[2] = null;
+    } else {
+      selectedFriendsAmount[2] = e.target.value;
     }
   };
 
@@ -315,77 +380,97 @@ export default function Dashboard(props) {
               onChange={(e) => setOwnerAmount(e.target.value)}
             />
             <Row>
-              <Col xs={12} md={6}>
-                <label
-                  htmlFor="owner_amount"
-                  className="label-style-add-expense"
-                >
-                  Split with{" "}
-                </label>
+              <Col xs={12} md={8}>
+                <label className="label-style-add-expense">Split with </label>
               </Col>
-              <Col xs={12} md={6}>
-                <label
-                  htmlFor="owner_amount"
-                  className="label-style-add-expense"
-                >
-                  Amount
-                </label>
+              <Col xs={12} md={4}>
+                <label className="label-style-add-expense">Amount</label>
               </Col>
             </Row>
             <br />
             <Row>
-              <Col xs={12} md={6}>
-                <select
+              <Col xs={12} md={8}>
+                <Form.Select
+                  size="sm"
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  onChange={(e) => setFriend1(e.target.value)}
+                  onChange={handleSelectFriend1}
                 >
-                  {friendsOption}
-                </select>
+                  <option value="default">Select Friend</option>
+                  {friends.length === 0
+                    ? null
+                    : friends.map((friend) => {
+                        return (
+                          <option key={friend._id} value={friend._id}>
+                            {friend.name}
+                          </option>
+                        );
+                      })}
+                </Form.Select>
               </Col>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
                   type="text"
                   name="friend1Amount"
-                  onChange={(e) => setFriend1Amount(e.target.value)}
+                  onChange={handleFriend1Amount}
                 />
               </Col>
             </Row>
             <br />
             <Row>
-              <Col xs={12} md={6}>
-                <select
+              <Col xs={12} md={8}>
+                <Form.Select
+                  size="sm"
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  onChange={(e) => setFriend2(e.target.value)}
+                  onChange={handleSelectFriend2}
                 >
-                  {friendsOption}
-                </select>
+                  <option value={null}>Select Friend</option>
+                  {friends.length === 0
+                    ? null
+                    : friends.map((friend) => {
+                        return (
+                          <option key={friend._id} value={friend._id}>
+                            {friend.name}
+                          </option>
+                        );
+                      })}
+                </Form.Select>
               </Col>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
                   type="text"
                   name="friend2Amount"
-                  onChange={(e) => setFriend2Amount(e.target.value)}
+                  onChange={handleFriend2Amount}
                 />
               </Col>
             </Row>
             <br />
             <Row>
-              <Col xs={12} md={6}>
-                <select
+              <Col xs={12} md={8}>
+                <Form.Select
+                  size="sm"
                   style={{ minWidth: "100%", maxWidth: "100%" }}
-                  onChange={(e) => setFriend3(e.target.value)}
+                  onChange={handleSelectFriend3}
                 >
-                  {friendsOption}
-                </select>
+                  <option value={null}>Select Friend</option>
+                  {friends.length === 0
+                    ? null
+                    : friends.map((friend) => {
+                        return (
+                          <option key={friend._id} value={friend._id}>
+                            {friend.name}
+                          </option>
+                        );
+                      })}
+                </Form.Select>
               </Col>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={4}>
                 <input
                   style={{ minWidth: "100%", maxWidth: "100%" }}
                   type="text"
                   name="friend3Amount"
-                  onChange={(e) => setFriend3Amount(e.target.value)}
+                  onChange={handleFriend3Amount}
                 />
               </Col>
             </Row>
