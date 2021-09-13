@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import validator from "validator";
+import swal from "sweetalert";
 import LogInService from "../services/LogInService";
 
 import "../styles/login.css";
@@ -21,9 +22,9 @@ function Login(props) {
   const validateFields = (e) => {
     e.preventDefault();
     if (!validator.isEmail(emailValue)) {
-      alert("Please enter valid email");
+      swal("Error", "Please enter valid email", "error");
     } else if (passwordValue.length < 8) {
-      alert("Password should contain more than 8 characters");
+      swal("Error", "Password should contain more than 8 characters", "error");
     } else {
       loginUser();
     }
@@ -41,7 +42,7 @@ function Login(props) {
         localStorage.setItem("token", response.data);
         props.toggleLogInState();
       } else {
-        alert(response.errorMessage);
+        swal("Error", response.errorMessage, "error");
       }
     } catch (error) {
       console.log(error);

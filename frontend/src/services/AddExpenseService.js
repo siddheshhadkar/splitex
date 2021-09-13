@@ -7,10 +7,12 @@ export default async function AddExpenseService(data) {
     Authorization: "bearer " + localStorage.getItem("token"),
   };
 
-
   try {
     const response = await axios.post("/transaction", data, { headers });
-    console.log(response);
+    if (response.data.success) {
+      console.log(response);
+      return response.data;
+    }
   } catch (e) {
     return e.response.data;
   }

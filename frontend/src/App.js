@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 import GetUserService from "./services/GetUserService";
 import LandingPage from "./components/LandingPage";
@@ -17,7 +18,7 @@ function App() {
       if (resultUser.success && resultUser.data) {
         setIsLoggedIn(true);
       } else {
-        alert(resultUser.errorMessage);
+        swal("Error", resultUser.errorMessage, "error");
         localStorage.removeItem("token");
         history.push("/login");
       }

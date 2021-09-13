@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
+import swal from "sweetalert";
 import AddBalanceService from "./../../services/AddBalanceService";
 
 import "../../styles/balance-card.css";
@@ -26,11 +27,11 @@ export default function BalanceCard(props) {
     try {
       let response = await AddBalanceService(data);
       if (response.success === true) {
-        alert("Added Successfully!");
+        swal("Amount added to wallet", "", "success");
         setAmount(response.data);
         setShow(false);
       } else {
-        alert(response.errorMessage);
+        swal("Error", response.errorMessage, "error");
       }
     } catch (error) {
       console.log(error);

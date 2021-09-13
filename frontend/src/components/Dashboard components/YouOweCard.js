@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
+import swal from "sweetalert";
 import SettleBillService from "../../services/SettleBillService";
 import "../../styles/you-owe-card.css";
 
@@ -22,10 +23,10 @@ export default function YouOweCard(props) {
     try {
       const response = await SettleBillService(data);
       if (response.success) {
-        alert("Bill settled");
+        swal("Bill settled", "", "success");
         window.location.reload();
       } else {
-        alert(response.errorMessage);
+        swal("Error", response.errorMessage, "error");
       }
     } catch (e) {
       console.log(e);
