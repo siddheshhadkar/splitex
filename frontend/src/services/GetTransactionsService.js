@@ -1,6 +1,6 @@
 import axios from "./axiosConfig";
 
-export default async function AddBalanceService(data) {
+export default async function GetTransactionsService() {
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -8,10 +8,8 @@ export default async function AddBalanceService(data) {
   };
 
   try {
-    const response = await axios.put("/user", data, { headers });
-    if (response.data.success) {
-      return response.data;
-    }
+    const response = await axios.get("/transaction/all", { headers });
+    return response.data;
   } catch (e) {
     return e.response.data;
   }
