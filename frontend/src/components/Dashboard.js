@@ -70,6 +70,7 @@ export default function Dashboard(props) {
                 });
                 const obj = {
                   friendId: friend.userId,
+                  description: transaction.description,
                   name: nameFriend,
                   amount: friend.amount,
                 };

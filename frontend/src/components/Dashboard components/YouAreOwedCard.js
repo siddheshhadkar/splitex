@@ -16,7 +16,8 @@ export default function YouAreOwedCard(props) {
         key={index}
       >
         <Card.Body className="owed-card-text">
-          {card.name}
+          <p className="lead">{card.name}</p>
+          {card.description}
           <div className="owed-card-amount">Rs. {card.amount}</div>
         </Card.Body>
       </Card>
