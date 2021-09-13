@@ -23,8 +23,9 @@ export default function YouOweCard(props) {
     try {
       const response = await SettleBillService(data);
       if (response.success) {
-        swal("Bill settled", "", "success");
-        window.location.reload();
+        swal("Bill settled", "", "success").then(() => {
+          window.location.reload();
+        });
       } else {
         swal("Error", response.errorMessage, "error");
       }
