@@ -24,7 +24,7 @@ function LandingPage() {
                 </p>
               </div>
               <Link to="/signup">
-                <Button>Create a free account!!</Button>
+                <Button className="bg-purple">Create a free account!!</Button>
               </Link>
             </div>
           </Col>

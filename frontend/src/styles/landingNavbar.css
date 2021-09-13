@@ -17,7 +17,18 @@
   color: white;
   font-size: larger;
   margin-right: 5%;
-  margin-left: 3%;
+  margin-left: 1%;
   float: right;
   font-weight: 500;
+}
+
+.btn-bg {
+  background-color: white;
+  color: #3b0a79;
+  padding: 0px 7px;
+  border-radius: 5px;
+}
+
+.bg-purple {
+  background-color: #3b0a79;
 }

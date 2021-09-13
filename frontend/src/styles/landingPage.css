@@ -9,3 +9,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.bg-purple {
+  background-color: #3b0a79;
+}

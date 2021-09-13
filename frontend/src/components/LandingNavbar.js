@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default function LandingNavbar() {
   return (
     <>
-      <Navbar bg="dark">
+      <Navbar className="bg-purple">
         <Container>
           <NavLink to="/" style={{ textDecoration: "none" }}>
             <Navbar.Brand className="brandName" style={{ color: "#FFFFFF" }}>
@@ -15,11 +15,11 @@ export default function LandingNavbar() {
           </NavLink>
         </Container>
 
-        <NavLink to="/login" className="btn-login">
+        <NavLink to="/login" className="btn-login btn-bg">
           Login
         </NavLink>
 
-        <NavLink to="/signup" className="btn-signup">
+        <NavLink to="/signup" className="btn-signup btn-bg">
           SignUp
         </NavLink>
       </Navbar>
