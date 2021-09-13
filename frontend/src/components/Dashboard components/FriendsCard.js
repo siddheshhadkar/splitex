@@ -8,7 +8,7 @@ export default function FriendsCard() {
     <>
       <Card className="friends-card" style={{ width: "auto", height: "auto" }}>
         <Card.Body>
-          <Card.Title className="right-section-card-title">Friends</Card.Title>
+          <Card.Title className="friend-section-card-title">Friends</Card.Title>
           <hr className="title-separator" />
           <div className="friends-text">
             Aarushi <br /> <hr />
