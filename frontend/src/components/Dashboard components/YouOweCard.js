@@ -85,13 +85,23 @@ export default function YouOweCard(props) {
           <Modal.Title style={{ color: "#3B0A79" }}>Settle Bills</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label className="label-style">Paying to: {currentCard.name}</label>
-          <br />
           <label className="label-style">
-            Description: {currentCard.description}
+            Paying to :{" "}
+            <strong style={{ color: "black" }}>{currentCard.name}</strong>
           </label>
           <br />
-          <label className="label-style">Amount: {currentCard.amount}</label>
+          <label className="label-style">
+            Description :{" "}
+            <strong style={{ color: "black" }}>
+              {" "}
+              {currentCard.description}{" "}
+            </strong>
+          </label>
+          <br />
+          <label className="label-style">
+            Amount :{" "}
+            <strong style={{ color: "black" }}> {currentCard.amount} </strong>
+          </label>
           <br />
           <label className="label-style">Choose payment option: </label>
           <br></br>

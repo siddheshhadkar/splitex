@@ -34,7 +34,7 @@ export default function TransactionHistoryCard(props) {
 
           <div className="transaction-card-date">
             {card.settledDate !== undefined ? (
-              card.settledDate.substring(0, 10)
+              new Date(card.settledDate).toLocaleString()
             ) : (
               <></>
             )}
@@ -44,13 +44,23 @@ export default function TransactionHistoryCard(props) {
     );
   };
   return (
-    <div>
-      {transactions.length > 0 ? (
-        <>{transactions.map(renderCard)}</>
-      ) : (
-        "No records to show"
-      )}
-      <br />
-    </div>
+    <>
+      <Card
+        style={{
+          width: "auto",
+          height: "300px",
+          overflowY: "scroll",
+        }}
+      >
+        <Card.Body>
+          <Card.Title className="card-title">You owe</Card.Title>
+          {transactions.length > 0 ? (
+            <>{transactions.map(renderCard)}</>
+          ) : (
+            "No records to show"
+          )}
+        </Card.Body>
+      </Card>
+    </>
   );
 }
