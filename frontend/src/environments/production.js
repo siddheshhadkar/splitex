@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:5000/api";
+const baseUrl = "api";
 
 const config = {
   baseUrl,

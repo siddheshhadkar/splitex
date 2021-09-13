@@ -1,4 +1,4 @@
-import config from "../environments/development";
+import config from "../environments/production";
 import axios from "axios";
 
 const instance = axios.create({
